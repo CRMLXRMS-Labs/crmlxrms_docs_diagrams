@@ -1,20 +1,7 @@
-Here is a sample README file for your repository:
 
-```markdown
 # CRM/LXRMS Documentation and Diagrams
 
 This repository contains the documentation and diagrams for the CRM/LXRMS system. It provides a detailed overview of the system architecture, including the services, databases, and event flows.
-
-## Directory Structure
-
-```
-.
-├── administration_concession_system
-├── crmlxrms_administration_concession_general
-├── crmlxrms_system
-├── .git
-└── requirements.txt
-```
 
 - **administration_concession_system**: Contains documentation and diagrams related to the administration concession system.
 - **crmlxrms_administration_concession_general**: Contains general documentation and diagrams for the CRM/LXRMS administration concession.
