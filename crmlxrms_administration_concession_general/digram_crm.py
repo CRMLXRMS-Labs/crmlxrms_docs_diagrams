@@ -35,6 +35,16 @@ with Diagram("Distributed CRMLXRMS & Administration Concessions Management Syste
             ml_db = PVC("ML Data")
             payment_db = PVC("Payment Data")
 
+        accounts_summary >> accounts_db
+        leads_summary >> leads_db
+        tasks_summary >> tasks_db
+        permissions >> permissions_db
+        orders >> orders_db
+        stats_internal >> stats_internal_db
+        stats_external >> stats_external_db
+        ml_service >> ml_db
+        payment >> payment_db
+
         with Cluster("CRM System Services"):
             crm_accounts_summary = Pod("Accounts Summary Service")
             crm_leads_summary = Pod("Leads Summary Service")
@@ -57,18 +67,6 @@ with Diagram("Distributed CRMLXRMS & Administration Concessions Management Syste
             payment_db_crm = PVC("Payment Data")
             http_load_balancer = Service("Http Clients Load Balancer")
 
-        # Connect Administration Concession System Services
-        accounts_summary >> accounts_db
-        leads_summary >> leads_db
-        tasks_summary >> tasks_db
-        permissions >> permissions_db
-        orders >> orders_db
-        stats_internal >> stats_internal_db
-        stats_external >> stats_external_db
-        ml_service >> ml_db
-        payment >> payment_db
-
-        # Connect CRM System Services
         crm_accounts_summary >> integration_db
         crm_leads_summary >> integration_db
         crm_tasks_summary >> integration_db
