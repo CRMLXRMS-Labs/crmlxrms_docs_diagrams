@@ -3,7 +3,7 @@ from diagrams.c4 import Person, Container, System, Relationship
 
 with Diagram("Tasks Summary Service - Context Diagram", direction="TB"):
     # Define the personas
-    crm_admin = Person("CRM Administrator", "Manages the overall CRM system and has full access.")
+    crm_admin = Person("CRM CS Administrator", "Manages the overall concession system (user from crm group) and has full access.")
     concession_admin = Person("Concession Administrator", "Manages the concession and user access.")
     concession_user = Person("Concession User", "Interacts with the concession system with defined permissions.")
     
