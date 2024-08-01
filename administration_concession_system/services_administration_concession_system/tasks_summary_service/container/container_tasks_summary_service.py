@@ -13,6 +13,12 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
         
         # Command Side (CQRS)
         with SystemBoundary("Command Side"):
+            create_task_command = Container(
+                "CreateTaskCommand",
+                "Command",
+                "Handles requests to create a new task"
+            )
+
             update_task_command = Container(
                 "UpdateTaskCommand",
                 "Command",
@@ -24,11 +30,17 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
                 "Command",
                 "Handles requests to deactivate a task"
             )
-            
-            create_task_command = Container(
-                "CreateTaskCommand",
+
+            verify_task_command = Container(
+                "VerifyTaskCommand",
                 "Command",
-                "Handles requests to create a new task"
+                "Handles requests to verify task information"
+            )
+
+            assign_task_command = Container(
+                "AssignTaskCommand",
+                "Command",
+                "Handles requests to assign a task to a specific user"
             )
         
         # Query Side (CQRS)
@@ -63,6 +75,18 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
                 "TaskDeactivatedEvent",
                 "Event",
                 "Published when a task is deactivated"
+            )
+
+            task_verified_event = Container(
+                "TaskVerifiedEvent",
+                "Event",
+                "Published when a task is verified"
+            )
+
+            task_assigned_event = Container(
+                "TaskAssignedEvent",
+                "Event",
+                "Published when a task is assigned to a user"
             )
 
         # Supporting Components
@@ -101,10 +125,14 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
         tasks_service >> Relationship("Handles") >> create_task_command
         tasks_service >> Relationship("Handles") >> update_task_command
         tasks_service >> Relationship("Handles") >> deactivate_task_command
+        tasks_service >> Relationship("Handles") >> verify_task_command
+        tasks_service >> Relationship("Handles") >> assign_task_command
         
         create_task_command >> Relationship("Executes business logic via") >> tasks_service
         update_task_command >> Relationship("Executes business logic via") >> tasks_service
         deactivate_task_command >> Relationship("Executes business logic via") >> tasks_service
+        verify_task_command >> Relationship("Executes business logic via") >> tasks_service
+        assign_task_command >> Relationship("Executes business logic via") >> tasks_service
 
         # Relationships - Query Side
         tasks_service >> Relationship("Handles") >> get_task_summary_query
@@ -121,13 +149,17 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
         event_publisher >> Relationship("Publishes") >> [
             task_created_event, 
             task_updated_event, 
-            task_deactivated_event
+            task_deactivated_event,
+            task_verified_event,
+            task_assigned_event
         ]
         
         # Event flow within the system
         task_created_event >> Relationship("Sent via") >> internal_event_bus
         task_updated_event >> Relationship("Sent via") >> internal_event_bus
         task_deactivated_event >> Relationship("Sent via") >> internal_event_bus
+        task_verified_event >> Relationship("Sent via") >> internal_event_bus
+        task_assigned_event >> Relationship("Sent via") >> internal_event_bus
         
         internal_event_bus >> Relationship("Forwards events to") >> external_event_bus
 
@@ -138,6 +170,12 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
                 ".NET",
                 "Stores data related to tasks from the Administration Concession System"
             )
+
+            tasks_summary_service_crm = Container(
+                "Tasks Summary Service",
+                ".NET",
+                "Stores and manages task-related data from the Administration Concession System"
+            )
             
             crm_event_publisher = Container(
                 "CRM Event Publisher",
@@ -145,12 +183,20 @@ with Diagram("Tasks Summary Service - Container Diagram", direction="TB"):
                 "Publishes events to CRM event bus"
             )
             
-            crm_db = Database(
+            crm_db_leads = Database(
                 "Leads Database",
                 "MongoDB",
                 "Stores lead-related data"
             )
+
+            crm_db_tasks = Database(
+                "Tasks Database",
+                "MongoDB",
+                "Stores task-related data"
+            )
             
-            external_event_bus >> Relationship("Forwards task data to") >> leads_service_crm
-            leads_service_crm >> Relationship("Stores data in") >> crm_db
+            external_event_bus >> Relationship("Forwards task data to") >> [leads_service_crm, tasks_summary_service_crm]
+            leads_service_crm >> Relationship("Stores data in") >> crm_db_leads
+            tasks_summary_service_crm >> Relationship("Stores data in") >> crm_db_tasks
             leads_service_crm >> Relationship("Publishes events via") >> crm_event_publisher
+            tasks_summary_service_crm >> Relationship("Publishes events via") >> crm_event_publisher
