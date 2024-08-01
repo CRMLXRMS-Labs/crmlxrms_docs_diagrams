@@ -29,6 +29,12 @@ with Diagram("Tasks Summary Service - Context Diagram", direction="TB"):
         ".NET",
         "Stores data related to users from the Administration Concession System"
     )
+    
+    tasks_summary_service_crm = Container(
+        "Tasks Summary Service",
+        ".NET",
+        "Stores and manages task-related data from the Administration Concession System"
+    )
 
     # Relationships for CRM Administrator
     crm_admin >> Relationship("Monitors and configures") >> concession_system
@@ -50,3 +56,4 @@ with Diagram("Tasks Summary Service - Context Diagram", direction="TB"):
     concession_system >> Relationship("Integrates with") >> tasks_service
     concession_system >> Relationship("Shares relevant task data with") >> crm_system
     crm_system >> Relationship("Stores user data in") >> leads_service_crm
+    crm_system >> Relationship("Stores task data in") >> tasks_summary_service_crm
