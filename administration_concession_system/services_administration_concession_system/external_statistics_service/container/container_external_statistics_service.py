@@ -8,7 +8,7 @@ with Diagram("External Statistics Service - Container Diagram", direction="TB"):
         external_statistics_service = Container(
             "External Statistics Service",
             ".NET",
-            "Provides external statistics and analytics"
+            "Generates statistics like behavior analysis, risk assessment, and trend analysis"
         )
         
         # Command Side (CQRS)
@@ -16,19 +16,19 @@ with Diagram("External Statistics Service - Container Diagram", direction="TB"):
             generate_statistics_command = Container(
                 "GenerateStatisticsCommand",
                 "Command",
-                "Handles requests to generate new statistics"
+                "Handles requests to generate new statistics based on client data"
             )
 
             update_statistics_command = Container(
                 "UpdateStatisticsCommand",
                 "Command",
-                "Handles requests to update statistics"
+                "Handles requests to update existing statistics"
             )
 
             delete_statistics_command = Container(
                 "DeleteStatisticsCommand",
                 "Command",
-                "Handles requests to delete statistics"
+                "Handles requests to delete specific statistics"
             )
         
         # Query Side (CQRS)
@@ -36,13 +36,13 @@ with Diagram("External Statistics Service - Container Diagram", direction="TB"):
             get_statistics_summary_query = Container(
                 "GetStatisticsSummaryQuery",
                 "Query",
-                "Fetches a summary of the statistics"
+                "Fetches summaries of the generated statistics"
             )
 
             get_statistics_details_query = Container(
                 "GetStatisticsDetailsQuery",
                 "Query",
-                "Fetches detailed statistics information"
+                "Fetches detailed information on specific statistics"
             )
 
         # Domain Events
@@ -82,13 +82,13 @@ with Diagram("External Statistics Service - Container Diagram", direction="TB"):
         statistics_db = Database(
             "Statistics Database",
             "MongoDB",
-            "Stores statistics-related data"
+            "Stores data related to generated statistics"
         )
         
         internal_event_bus = Container(
             "Internal Event Bus",
             "RabbitMQ",
-            "Handles internal communication within the Administration Concession System"
+            "Facilitates internal communication within the concession system"
         )
         
         external_event_bus = Container(
@@ -133,52 +133,43 @@ with Diagram("External Statistics Service - Container Diagram", direction="TB"):
 
         # CRM System
         with SystemBoundary("CRM System"):
-            leads_service_crm = Container(
-                "Leads Summary Service",
+            crm_integration_service = Container(
+                "CRM Integration Service",
                 ".NET",
-                "Handles and stores statistics-related data from the Administration Concession System"
+                "Integrates statistics data with CRM system"
             )
 
-            orders_summary_service_crm = Container(
-                "Orders Summary Service",
-                ".NET",
-                "Handles and stores order-related statistics data from the Administration Concession System"
+            ml_service = Container(
+                "ML Service",
+                "ML.NET",
+                "Provides machine learning-based analytics and predictions"
             )
 
-            facturation_service_crm = Container(
+            facturation_service = Container(
                 "Facturation Service",
                 ".NET",
-                "Handles invoicing and billing data related to statistics from the Administration Concession System"
+                "Manages invoicing and payment processing"
             )
             
-            crm_event_publisher = Container(
-                "CRM Event Publisher",
-                "ASP.NET Core with RabbitMQ",
-                "Publishes events to CRM event bus"
+            external_statistics_service_crm = Container(
+                "External Statistics Service",
+                ".NET",
+                "Handles external statistics for CRM"
             )
             
-            crm_db_leads = Database(
-                "Leads Database",
+            crm_db = Database(
+                "CRM Database",
                 "MongoDB",
-                "Stores lead-related data"
-            )
-
-            crm_db_orders = Database(
-                "Orders Database",
-                "MongoDB",
-                "Stores order-related data"
-            )
-
-            crm_db_facturation = Database(
-                "Facturation Database",
-                "MongoDB",
-                "Stores invoicing and billing data"
+                "Stores client and statistics-related data"
             )
             
-            external_event_bus >> Relationship("Forwards statistics data to") >> [leads_service_crm, orders_summary_service_crm, facturation_service_crm]
-            leads_service_crm >> Relationship("Stores data in") >> crm_db_leads
-            orders_summary_service_crm >> Relationship("Stores data in") >> crm_db_orders
-            facturation_service_crm >> Relationship("Stores data in") >> crm_db_facturation
-            leads_service_crm >> Relationship("Publishes events via") >> crm_event_publisher
-            orders_summary_service_crm >> Relationship("Publishes events via") >> crm_event_publisher
-            facturation_service_crm >> Relationship("Publishes events via") >> crm_event_publisher
+            external_event_bus >> Relationship("Forwards statistics data to") >> [
+                crm_integration_service, 
+                ml_service, 
+                facturation_service, 
+                external_statistics_service_crm
+            ]
+            crm_integration_service >> Relationship("Stores data in") >> crm_db
+            ml_service >> Relationship("Processes data and returns insights to") >> crm_integration_service
+            facturation_service >> Relationship("Uses statistics for generating invoices") >> crm_integration_service
+            external_statistics_service_crm >> Relationship("Uses statistics to generate reports") >> crm_integration_service

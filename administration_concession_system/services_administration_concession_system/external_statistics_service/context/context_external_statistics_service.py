@@ -3,62 +3,29 @@ from diagrams.c4 import Person, Container, System, Relationship
 
 with Diagram("External Statistics Service - Context Diagram", direction="TB"):
     # Define personas
-    crm_admin = Person("CRM CS Administrator", "Manages the overall concession system (user from CRM group) and has full access.")
-    concession_admin = Person("Concession Administrator", "Manages the concession and user access.")
-    concession_user = Person("Concession User", "Interacts with the concession system with defined permissions.")
-    
+    client_admin = Person("Client Administrator", "Manages client-side application settings and integration")
+    crm_admin = Person("CRM Administrator", "Oversees CRM system and manages data processing")
+    concession_admin = Person("Concession Administrator", "Manages access to statistics in the administration concession system")
+
     # Define system boundaries
-    concession_system = System("Administration Concession System", "Manages concessions and user access")
-    
     external_statistics_service = Container(
         "External Statistics Service",
         ".NET",
-        "Provides external statistics and analytics"
-    )
-    
-    auth_service = Container(
-        "Authorization Microservice",
-        "ASP.NET Core",
-        "Handles user authentication and authorization"
-    )
-    
-    crm_system = System("CRM System", "Manages customer relationships and service platform users")
-    
-    leads_service_crm = Container(
-        "Leads Summary Service",
-        ".NET",
-        "Handles and stores data related to statistics from the Administration Concession System"
+        "Provides client-specific statistics like behavior analysis and risk assessment"
     )
 
-    orders_service_crm = Container(
-        "Orders Service (CRM)",
-        ".NET",
-        "Handles and stores order-related data from the Administration Concession System"
-    )
+    # CRM System providing data
+    crm_system = System("CRM System", "Centralized Customer Relationship Management System")
+    integration_service = Container("Integration Service", "ASP.NET Core", "Integrates data from various sources")
+    ml_service = Container("ML Service", "ML.NET", "Performs machine learning-based analytics")
+    facturation_service = Container("Facturation Service", "ASP.NET Core", "Handles invoicing and payment processing")
+    external_statistics_service_crm = Container("External Statistics Service (CRM)", "ASP.NET Core", "Generates and processes statistics within CRM")
 
-    facturation_service_crm = Container(
-        "Facturation Service (CRM)",
-        ".NET",
-        "Handles invoicing and billing data related to statistics from the Administration Concession System"
-    )
+    # Relationships
+    client_admin >> Relationship("Configures data collection for") >> external_statistics_service
+    crm_admin >> Relationship("Oversees data processing and analysis in") >> crm_system
+    concession_admin >> Relationship("Accesses statistics via") >> external_statistics_service
 
-    # Relationships for CRM Administrator
-    crm_admin >> Relationship("Monitors and configures") >> concession_system
-    crm_admin >> Relationship("Requests statistics data") >> external_statistics_service
-    external_statistics_service >> Relationship("Provides statistics summary to") >> crm_admin
-
-    # Relationships for Concession Administrator
-    concession_admin >> Relationship("Manages and configures access") >> concession_system
-    concession_admin >> Relationship("Requests statistics summary") >> external_statistics_service
-    external_statistics_service >> Relationship("Provides statistics summary to") >> concession_admin
-    
-    # Relationships for Concession User
-    concession_user >> Relationship("Requests statistics summary with limited access") >> external_statistics_service
-    external_statistics_service >> Relationship("Validates permissions with") >> auth_service
-    auth_service >> Relationship("Validates user authentication") >> external_statistics_service
-    external_statistics_service >> Relationship("Provides statistics summary to") >> concession_user
-
-    # Integration relationships
-    concession_system >> Relationship("Integrates with") >> external_statistics_service
-    external_statistics_service >> Relationship("Shares statistics data with") >> crm_system
-    crm_system >> Relationship("Processes and stores statistics data in") >> [leads_service_crm, orders_service_crm, facturation_service_crm]
+    crm_system >> Relationship("Processes data through") >> [integration_service, ml_service, facturation_service, external_statistics_service_crm]
+    external_statistics_service_crm >> Relationship("Provides pre-processed statistics to") >> external_statistics_service
+    external_statistics_service >> Relationship("Presents statistics to") >> concession_admin
