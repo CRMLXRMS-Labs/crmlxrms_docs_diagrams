@@ -136,13 +136,13 @@ with Diagram("Orders Service - Container Diagram", direction="TB"):
             leads_service_crm = Container(
                 "Leads Summary Service",
                 ".NET",
-                "Stores data related to orders from the Administration Concession System"
+                "Handles and stores lead-related data from the Administration Concession System"
             )
 
             orders_summary_service_crm = Container(
                 "Orders Summary Service",
                 ".NET",
-                "Stores and manages order-related data from the Administration Concession System"
+                "Handles and stores order-related data from the Administration Concession System"
             )
             
             crm_event_publisher = Container(
