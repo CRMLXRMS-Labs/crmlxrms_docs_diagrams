@@ -1,13 +1,13 @@
 from diagrams import Diagram
 from diagrams.c4 import Container, Database, SystemBoundary, Relationship
 
-with Diagram("Authorization Microservice - Detailed Container Diagram with SignalR", direction="TB"):
+with Diagram("Authorization Microservice - Detailed Container Diagram with RegisterConcessionCommand", direction="TB"):
     with SystemBoundary("Administration Concession System"):
         # Authorization Microservice
         auth_service = Container(
             "Authorization Microservice",
             "ASP.NET Core",
-            "Handles authentication and authorization"
+            "Handles authentication, authorization, and registration of concessions"
         )
 
         # Command Side (CQRS)
@@ -52,6 +52,12 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
                 "VerifyEmailCommand",
                 "Command",
                 "Initiates email verification process"
+            )
+
+            register_concession_command = Container(
+                "RegisterConcessionCommand",
+                "Command",
+                "Registers a new concession in the system"
             )
 
         # Query Side (CQRS)
@@ -118,11 +124,17 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
                 "Published when a user's email verification fails"
             )
 
+            concession_registered_event = Container(
+                "ConcessionRegisteredEvent",
+                "Event",
+                "Published when a new concession is registered"
+            )
+
         # Supporting Components
         auth_service_logic = Container(
             "AuthService",
             "ASP.NET Core",
-            "Business logic for authentication and authorization"
+            "Business logic for authentication, authorization, and concession registration"
         )
 
         jwt_service = Container(
@@ -150,6 +162,7 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
         auth_service >> Relationship("Handles") >> enable_2fa_command
         auth_service >> Relationship("Handles") >> disable_2fa_command
         auth_service >> Relationship("Handles") >> verify_email_command
+        auth_service >> Relationship("Handles") >> register_concession_command
         
         user_login_command >> Relationship("Executes business logic via") >> auth_service_logic
         user_logout_command >> Relationship("Executes business logic via") >> auth_service_logic
@@ -158,6 +171,7 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
         enable_2fa_command >> Relationship("Executes business logic via") >> auth_service_logic
         disable_2fa_command >> Relationship("Executes business logic via") >> auth_service_logic
         verify_email_command >> Relationship("Executes business logic via") >> auth_service_logic
+        register_concession_command >> Relationship("Executes business logic via") >> auth_service_logic
 
         # Relationships - Query Side
         auth_service >> Relationship("Handles") >> get_user_permissions_query
@@ -180,7 +194,8 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
             two_factor_enabled_event, 
             two_factor_disabled_event, 
             email_verified_event, 
-            email_verification_failed_event
+            email_verification_failed_event,
+            concession_registered_event
         ]
         
         user_logged_in_event >> Relationship("Sent via") >> internal_event_bus
@@ -190,6 +205,7 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
         two_factor_disabled_event >> Relationship("Sent via") >> internal_event_bus
         email_verified_event >> Relationship("Sent via") >> internal_event_bus
         email_verification_failed_event >> Relationship("Sent via") >> internal_event_bus
+        concession_registered_event >> Relationship("Sent via") >> internal_event_bus
         
         internal_event_bus >> Relationship("Forwards events to") >> external_event_bus
         
@@ -212,6 +228,12 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Signa
             "CRM  leads SignalR Hub",
             "ASP.NET Core",
             "Real-time communication hub for notifying CRM users of online leads"
+        )
+
+        user_crm = Container(
+            "CRM User",
+            "User",
+            "User in CRM system receiving updates"
         )
         
         leads_service_crm >> Relationship("Notifies via") >> signalr_hub
