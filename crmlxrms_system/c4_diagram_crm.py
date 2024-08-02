@@ -169,10 +169,10 @@ with Diagram("Container Diagram for CRM/LXRMS System", direction="TB", graph_att
             description="Stores payment-related data."
         )
         
-        fortification_db = Database(
-            name="Fortification Database",
+        facturation_db = Database(
+            name="F Database",
             technology="MongoDB",
-            description="Stores fortification-related data."
+            description="Stores facturation-related data."
         )
         
         auth_db = Database(
@@ -210,7 +210,7 @@ with Diagram("Container Diagram for CRM/LXRMS System", direction="TB", graph_att
     external_statistics_service >> Relationship("Stores data in") >> external_statistics_db
     ml_service >> Relationship("Stores data in") >> ml_db
     payment_service >> Relationship("Stores data in") >> payments_db
-    facturation_service >> Relationship("Stores data in") >> fortification_db
+    facturation_service >> Relationship("Stores data in") >> facturation_db
     authorization_microservice >> Relationship("Stores data in") >> auth_db
     
     # Services sending events to Event Bus

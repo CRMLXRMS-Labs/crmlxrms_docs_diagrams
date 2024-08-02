@@ -44,12 +44,6 @@ with Diagram("Enhanced Schema for Administration and CRM Systems", direction="TB
             description="Provides users with a summary of their accounts."
         )
         
-        leads_summary_service_admin = Container(
-            name="Leads Summary Service",
-            technology=".NET",
-            description="Provides users with a summary of their leads."
-        )
-        
         tasks_summary_service_admin = Container(
             name="Tasks Summary Service",
             technology=".NET",
@@ -80,12 +74,6 @@ with Diagram("Enhanced Schema for Administration and CRM Systems", direction="TB
             description="Provides external statistics and analytics."
         )
         
-        ml_service_admin = Container(
-            name="ML Service",
-            technology=".NET",
-            description="Provides machine learning-based analytics and predictions."
-        )
-        
         payment_service_admin = Container(
             name="Payment Service",
             technology=".NET",
@@ -104,13 +92,7 @@ with Diagram("Enhanced Schema for Administration and CRM Systems", direction="TB
             technology="MongoDB",
             description="Stores account-related data."
         )
-        
-        leads_db_admin = Database(
-            name="Leads Database",
-            technology="MongoDB",
-            description="Stores lead-related data."
-        )
-        
+    
         tasks_db_admin = Database(
             name="Tasks Database",
             technology="MongoDB",
@@ -140,13 +122,7 @@ with Diagram("Enhanced Schema for Administration and CRM Systems", direction="TB
             technology="MongoDB",
             description="Stores external statistics data."
         )
-        
-        ml_db_admin = Database(
-            name="ML Database",
-            technology="MongoDB",
-            description="Stores machine learning-related data."
-        )
-        
+                
         payments_db_admin = Database(
             name="Payments Database",
             technology="MongoDB",
