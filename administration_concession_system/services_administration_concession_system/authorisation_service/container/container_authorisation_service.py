@@ -10,6 +10,12 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Regis
             "Handles authentication, authorization, and registration of concessions"
         )
 
+        admin_internal_operations_service = Container(
+            "Administration Concession Internal Opertaions Microservice",
+            "ASP.NET Core",
+            "Translates all operations performed in administration concession system"
+        )
+
         # Command Side (CQRS)
         with SystemBoundary("Command Side"):
             user_login_command = Container(
@@ -215,6 +221,19 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Regis
             ".NET",
             "Stores data of users from the Administration Concession System"
         )
+        operations_internal_service_crm = Container(
+            "CRM Internal Operations Service",
+            ".NET",
+            "Works out the data of each opearation in Administration Concession System to CRM System"
+        )
+        auth_service >> Relationship("Forwards data to") >> admin_internal_operations_service
+        admin_internal_operations_service >> Relationship("Forwards data to") >> operations_internal_service_crm
+
+        operations_internal_service_crm >> Relationship("Stores data in") >> Database(
+            "CRM Internal Operations Database",
+            "MongoDB",
+            "Stores operations data, from Administration Concession System"
+        )
         
         external_event_bus >> Relationship("Forwards user data to") >> leads_service_crm
         leads_service_crm >> Relationship("Stores data in") >> Database(
@@ -238,3 +257,6 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Regis
         
         leads_service_crm >> Relationship("Notifies via") >> signalr_hub
         signalr_hub >> Relationship("Updates CRM users in real-time") >> user_crm
+        operations_internal_service_crm >>  Relationship("Translates users' operaions data in real-time") >> user_crm
+
+        
