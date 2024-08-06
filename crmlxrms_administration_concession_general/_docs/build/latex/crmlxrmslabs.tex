@@ -66,7 +66,7 @@
 \title{CRMLXRMS Labs}
 \date{Aug 06, 2024}
 \release{}
-\author{Amadeusz Andrii Piotr}
+\author{Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{}
 \makeindex
@@ -414,6 +414,188 @@ The Authorization Microservice is a core component of the Administration Concess
 \sphinxAtStartPar
 \sphinxstylestrong{Response}:
 \sphinxhyphen{} \sphinxtitleref{is2FAEnabled} (boolean): Indicates whether 2FA is enabled for the user.
+
+\end{itemize}
+
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/authorization_service:inbox-events}}
+\sphinxAtStartPar
+The Authorization Microservice processes the following inbox events:
+
+\sphinxAtStartPar
+\sphinxstylestrong{ChangeUserRightsEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: An event that triggers when a user’s rights are changed within the CRM system.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Updates the user’s permissions within the Administration Concession System to reflect the changes made in the CRM system.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{BlockUserAccessEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: An event that triggers when a user is blocked or suspended in the CRM system.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Immediately revokes the user’s access to the Administration Concession System, ensuring that the block is enforced across systems.
+
+\end{itemize}
+
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/authorization_service:outbox-events}}
+\sphinxAtStartPar
+The Authorization Microservice emits the following outbox events:
+
+\sphinxAtStartPar
+\sphinxstylestrong{UserLoggedInEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after a successful user login within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the user’s login, updates session details, and triggers any necessary workflows.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{UserLoggedOutEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after a user logs out within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system that the user has logged out, updates session termination details, and triggers any cleanup actions.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{PasswordResetEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after a user’s password is reset within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the password reset, triggers email notifications, and updates security logs.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{TwoFactorEnabledEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after Two\sphinxhyphen{}Factor Authentication (2FA) is enabled for a user within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the 2FA enablement, updates user security settings, and ensures that 2FA is enforced consistently across systems.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{TwoFactorDisabledEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after Two\sphinxhyphen{}Factor Authentication (2FA) is disabled for a user within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the 2FA disablement, updates user security settings, and ensures that the change is reflected across systems.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{EmailVerifiedEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted when a user’s email is successfully verified within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the email verification, updates the user’s profile, and triggers any related workflows.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{EmailVerificationFailedEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted when a user’s email verification fails within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the failed verification, updates logs, and marks the user’s email as unverified.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{ConcessionRegisteredEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after a new concession is registered within the Administration Concession System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: CRM System.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the CRM system of the new concession, triggers onboarding processes, and syncs concession details across systems.
 
 \end{itemize}
 

@@ -36,6 +36,7 @@
   <section id="authorization-service">
 <h1>Authorization Service<a class="headerlink" href="#authorization-service" title="Link to this heading">¶</a></h1>
 <p>The Authorization Microservice is a core component of the Administration Concession System. It handles authentication, authorization, and user management processes, which are essential for maintaining secure access and operational control. This microservice also integrates with the CRM system to share user data and operational events.</p>
+<img alt="Detailed Container Diagram of Authorization Microservice" class="align-center" src="../_images/authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand.png" />
 <section id="api-documentation">
 <h2>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading">¶</a></h2>
 </section>
@@ -159,6 +160,86 @@
 - <cite>is2FAEnabled</cite> (boolean): Indicates whether 2FA is enabled for the user.</p></li>
 </ul>
 </section>
+<section id="inbox-events">
+<h2>Inbox Events<a class="headerlink" href="#inbox-events" title="Link to this heading">¶</a></h2>
+<p>The Authorization Microservice processes the following inbox events:</p>
+<p><strong>ChangeUserRightsEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: An event that triggers when a user’s rights are changed within the CRM system.</p></li>
+<li><p><strong>Source</strong>: CRM System – Leads summary/managenent service (External CRM event bus brigged to Administration concession system).</p></li>
+<li><p><strong>Actions</strong>: Updates the user’s permissions within the Administration Concession System to reflect the changes made in the CRM system.</p></li>
+</ul>
+<p><strong>BlockUserAccessEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: An event that triggers when a user is blocked or suspended in the CRM system.</p></li>
+<li><p><strong>Source</strong>: CRM System – Leads summary/managenent service  (External CRM event bus brigged to Administration concession system).</p></li>
+<li><p><strong>Actions</strong>: Immediately revokes the user’s access to the Administration Concession System, ensuring that the block is enforced across systems.</p></li>
+</ul>
+<p><strong>UnBlockUserAccessEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: An event that triggers when a user is unblocked in case of being suspended in the CRM system.</p></li>
+<li><p><strong>Source</strong>: CRM System – Leads summary/managenent service  (External CRM event bus brigged to Administration concession system).</p></li>
+<li><p><strong>Actions</strong>: Immediately revokes the user’s access to the Administration Concession System, ensuring that the block is enforced across systems.</p></li>
+</ul>
+</section>
+<section id="outbox-events">
+<h2>Outbox Events<a class="headerlink" href="#outbox-events" title="Link to this heading">¶</a></h2>
+<p>The Authorization Microservice emits the following outbox events:</p>
+<p><strong>UserLoggedInEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a successful user login within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: Administration Concession system Internal operation serivce, CRM System Leads Summary Service (leads hub connector service), CRM GRPC intergnal operations service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession Administrator user and CRM system user of the user’s login, updates session details.</p></li>
+</ul>
+<p><strong>User2FaAccessTokenGenerated</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a successful user login within the password and login to  the Administration Concession System but having the 2fa enabled.</p></li>
+<li><p><strong>Destination</strong>: Administration Concession system Notification service, Administration Concession System Internal Operations service.</p></li>
+<li><p><strong>Actions</strong>: Required Noitification service Event Emition to pass the token generated back to User trying to sign-in, Notify Administration of Concession system of having the user trying to access the system with 2fa token.</p></li>
+</ul>
+<p><strong>UserLoggedOutEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a user logs out within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the CRM system that the user has logged out (updated leads connection hub), updates session termination details.</p></li>
+</ul>
+<p><strong>PasswordResetEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a user’s password is reset within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the specifi user (lead in the case of CRM) password reset, triggers notifications in Administration Concession System Notifcation service (which will be possibly passed to Email Service), and updates security logs.</p></li>
+</ul>
+<p><strong>TwoFactorEnabledEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after Two-Factor Authentication is enabled for a user within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. .</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the specifi user update, updates user security settings, and ensures that 2FA is enforced consistently across AConS.</p></li>
+</ul>
+<p><strong>TwoFactorDisabledEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after Two-Factor Authentication is disabled for a user within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. .</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the specifi user update, updates user security settings, and ensures that 2FA is enforced consistently across AConS.</p></li>
+</ul>
+<p><strong>EmailVerifiedEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted when a user’s email is successfully verified within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of specific user (lead) email verification, updates the user’s profile.</p></li>
+</ul>
+<p><strong>EmailVerificationFailedEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted when a user’s email verification fails within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of specific user (lead) failed verification, updates logs, and marks the user’s email as unverified.</p></li>
+</ul>
+<p><strong>ConcessionRegisteredEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a new concession is registered within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Orders service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the new concession, triggers onboarding processes, and syncs concession details across systems.</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -220,7 +301,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;2024, Amadeusz Andrii Piotr.
+      &#169;2024, Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk.
       
       |
       Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>

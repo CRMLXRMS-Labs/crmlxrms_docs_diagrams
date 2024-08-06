@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'CRMLXRMS Labs'
-copyright = '2024, Amadeusz Andrii Piotr'
-author = 'Amadeusz Andrii Piotr'
+copyright = '2024, Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk'
+author = 'Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
