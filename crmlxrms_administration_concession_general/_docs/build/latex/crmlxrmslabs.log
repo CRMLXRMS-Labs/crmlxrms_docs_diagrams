@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.7.29)  6 AUG 2024 02:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.7.29)  6 AUG 2024 03:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -744,7 +744,7 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count330
 \l__pdf_internal_box=\box121
 )
-No file crmlxrmslabs.aux.
+(./crmlxrmslabs.aux)
 \openout1 = `crmlxrmslabs.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
@@ -765,6 +765,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
+
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count331
@@ -824,12 +825,14 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring ON on input line 73.
+(./crmlxrmslabs.out) (./crmlxrmslabs.out)
 \@outlinefile=\write5
 \openout5 = `crmlxrmslabs.out'.
 
 Package hyperref Info: Option `pageanchor' set `false' on input line 81.
 LaTeX Font Info:    Trying to load font information for T1+qhv on input line 81
 .
+
 (/usr/share/texmf/tex/latex/tex-gyre/t1qhv.fd
 File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 )<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
@@ -844,6 +847,11 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+Overfull \hbox (8.55867pt too wide) in paragraph at lines 81--81
+ [][]
+ []
+
+
 
 [1
 
@@ -853,8 +861,7 @@ dvips/tex-gyre/q-ec.enc}]
 [2
 
 
-]
-No file crmlxrmslabs.toc.
+] (./crmlxrmslabs.toc)
 \tf@toc=\write6
 \openout6 = `crmlxrmslabs.toc'.
 
@@ -879,26 +886,41 @@ File: t1txtt.fd 2000/12/15 v3.1
 
 ]
 Chapter 1.
+<authorization_microservice_-_detailed_container_diagram_with_registerconcessio
+ncommand.png, id=66, 2899.08093pt x 2194.44844pt>
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 106.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[3 <./authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png>]
 LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-15.
-(/usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
+17.
+ (/usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 )
 
-[3{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-
-[4]
+[4{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
 
 [5]
 
-[6
+[6]
 
-]
+[7]
+
+[8]
 Chapter 2.
 No file crmlxrmslabs.ind.
 
 
-[7] (./crmlxrmslabs.aux)
+[9
+
+] (./crmlxrmslabs.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
@@ -913,25 +935,25 @@ Package rerunfilecheck Warning: File `crmlxrmslabs.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `crmlxrmslabs.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7FD6E8AD7497CE074E44B5D56876A253;813.
+(rerunfilecheck)             Before: 7FD6E8AD7497CE074E44B5D56876A253;813
+(rerunfilecheck)             After:  9C7781543F1A1538DB91289395EA4868;1066.
  ) 
 Here is how much of TeX's memory you used:
- 16468 strings out of 475544
- 273547 string characters out of 5777741
- 1939905 words of memory out of 5000000
- 38738 multiletter control sequences out of 15000+600000
- 607013 words of font info for 68 fonts, out of 8000000 for 9000
+ 16519 strings out of 475544
+ 275070 string characters out of 5777741
+ 1941905 words of memory out of 5000000
+ 38764 multiletter control sequences out of 15000+600000
+ 608304 words of font info for 74 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,11n,79p,355b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,79p,365b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf/font
 s/type1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/
 qtmr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on crmlxrmslabs.pdf (11 pages, 120011 bytes).
+Output written on crmlxrmslabs.pdf (13 pages, 459730 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
- 18 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 133 PDF objects out of 1000 (max. 8388607)
+ 103 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

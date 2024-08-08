@@ -64,7 +64,7 @@
 
 
 \title{CRMLXRMS Labs}
-\date{Aug 06, 2024}
+\date{Aug 08, 2024}
 \release{}
 \author{Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -102,6 +102,8 @@ documentation for details.
 \label{\detokenize{administration_concession_system/authorization_service:authorization-service}}\label{\detokenize{administration_concession_system/authorization_service::doc}}
 \sphinxAtStartPar
 The Authorization Microservice is a core component of the Administration Concession System. It handles authentication, authorization, and user management processes, which are essential for maintaining secure access and operational control. This microservice also integrates with the CRM system to share user data and operational events.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
 
 
 \subsection{API Documentation}
@@ -432,7 +434,7 @@ The Authorization Microservice processes the following inbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Source}: CRM System.
+\sphinxstylestrong{Source}: CRM System \textendash{} Leads summary/managenent service (External CRM event bus brigged to Administration concession system).
 
 \item {} 
 \sphinxAtStartPar
@@ -449,7 +451,24 @@ The Authorization Microservice processes the following inbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Source}: CRM System.
+\sphinxstylestrong{Source}: CRM System \textendash{} Leads summary/managenent service  (External CRM event bus brigged to Administration concession system).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Immediately revokes the user’s access to the Administration Concession System, ensuring that the block is enforced across systems.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{UnBlockUserAccessEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: An event that triggers when a user is unblocked in case of being suspended in the CRM system.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: CRM System \textendash{} Leads summary/managenent service  (External CRM event bus brigged to Administration concession system).
 
 \item {} 
 \sphinxAtStartPar
@@ -472,11 +491,28 @@ The Authorization Microservice emits the following outbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: Administration Concession system Internal operation serivce, CRM System Leads Summary Service (leads hub connector service), CRM GRPC intergnal operations service.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the user’s login, updates session details, and triggers any necessary workflows.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession Administrator user and CRM system user of the user’s login, updates session details.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{User2FaAccessTokenGenerated}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after a successful user login within the password and login to  the Administration Concession System but having the 2fa enabled.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: Administration Concession system Notification service, Administration Concession System Internal Operations service.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Required Noitification service Event Emition to pass the token generated back to User trying to sign\sphinxhyphen{}in, Notify Administration of Concession system of having the user trying to access the system with 2fa token.
 
 \end{itemize}
 
@@ -489,11 +525,11 @@ The Authorization Microservice emits the following outbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system that the user has logged out, updates session termination details, and triggers any cleanup actions.
+\sphinxstylestrong{Actions}: Notifies the CRM system that the user has logged out (updated leads connection hub), updates session termination details.
 
 \end{itemize}
 
@@ -506,11 +542,11 @@ The Authorization Microservice emits the following outbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the password reset, triggers email notifications, and updates security logs.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession System administrator, CRM system of the specifi user (lead in the case of CRM) password reset, triggers notifications in Administration Concession System Notifcation service (which will be possibly passed to Email Service), and updates security logs.
 
 \end{itemize}
 
@@ -519,15 +555,15 @@ The Authorization Microservice emits the following outbox events:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Description}: Emitted after Two\sphinxhyphen{}Factor Authentication (2FA) is enabled for a user within the Administration Concession System.
+\sphinxstylestrong{Description}: Emitted after Two\sphinxhyphen{}Factor Authentication is enabled for a user within the Administration Concession System.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. .
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the 2FA enablement, updates user security settings, and ensures that 2FA is enforced consistently across systems.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession System administrator, CRM system of the specifi user update, updates user security settings, and ensures that 2FA is enforced consistently across AConS.
 
 \end{itemize}
 
@@ -536,15 +572,15 @@ The Authorization Microservice emits the following outbox events:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Description}: Emitted after Two\sphinxhyphen{}Factor Authentication (2FA) is disabled for a user within the Administration Concession System.
+\sphinxstylestrong{Description}: Emitted after Two\sphinxhyphen{}Factor Authentication is disabled for a user within the Administration Concession System.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. .
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the 2FA disablement, updates user security settings, and ensures that the change is reflected across systems.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession System administrator, CRM system of the specifi user update, updates user security settings, and ensures that 2FA is enforced consistently across AConS.
 
 \end{itemize}
 
@@ -557,11 +593,11 @@ The Authorization Microservice emits the following outbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the email verification, updates the user’s profile, and triggers any related workflows.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession System administrator, CRM system of specific user (lead) email verification, updates the user’s profile.
 
 \end{itemize}
 
@@ -574,11 +610,11 @@ The Authorization Microservice emits the following outbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: CRM System Operation service, CRM leads summary service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the failed verification, updates logs, and marks the user’s email as unverified.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession System administrator, CRM system of specific user (lead) failed verification, updates logs, and marks the user’s email as unverified.
 
 \end{itemize}
 
@@ -591,11 +627,372 @@ The Authorization Microservice emits the following outbox events:
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Destination}: CRM System.
+\sphinxstylestrong{Destination}: CRM System Orders service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Actions}: Notifies the CRM system of the new concession, triggers onboarding processes, and syncs concession details across systems.
+\sphinxstylestrong{Actions}: Notifies the Administration Concession System administrator, CRM system of the new concession, triggers onboarding processes, and syncs concession details across systems.
+
+\end{itemize}
+
+\sphinxstepscope
+
+
+\section{Accounts Summary Service}
+\label{\detokenize{administration_concession_system/accounts_summary_service:accounts-summary-service}}\label{\detokenize{administration_concession_system/accounts_summary_service::doc}}
+\sphinxAtStartPar
+The Accounts Summary Service is an integral component of the Administration Concession System, designed to manage and provide a summary of administration concession user accounts. This service facilitates various operations related to accounts, including creation, updates, permissions updates, deactivation, and verification. It also supports queries for retrieving account summaries and detailed account information.
+The permission synchronization will hapeent through the permission service: after user with the corresponding permission will create the pecific user role with the specific permission assignt the permissions set and the role to the specific user the corresponding repository in the studnet service will be udpated do to inbox event from permission service. This optimisation is required for the not biased http request. However, in this case, the one more problem appears: for the moment the service with permissions is not available there will not be possible to provide any permission update for the specific role. For this time to situation when the new user has been created accured after the Permission Service will be available there should be a check available and additional outbox evnet publiching for such sort of situations. Theoretically, also thie situation should be in qute informative way described in the Permission service of the Administration Concesstion system.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{accounts_summary_service_-_complex_container_diagram}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/accounts_summary_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/accounts_summary_service:commands}}
+\sphinxAtStartPar
+\sphinxstylestrong{CreateAccountCommand}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Handles the creation of a new user account within the system.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/accounts/create}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{POST}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Body}:
+\sphinxhyphen{} \sphinxtitleref{userId} (string, required): Unique identifier for the user.
+\sphinxhyphen{} \sphinxtitleref{accountDetails} (object, required): Detailed information about the account (e.g., email, name, etc.).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string): The ID of the newly created account.
+\sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation that the account has been created.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: \sphinxtitleref{AccountCreatedEvent}
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{UpdateAccountCommand}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Handles updates to an existing user account’s information.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/accounts/update}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{PUT}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Body}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string, required): The ID of the account to be updated.
+\sphinxhyphen{} \sphinxtitleref{updatedDetails} (object, required): Updated account information (e.g., new email, name changes, etc.).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation that the account has been updated.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: \sphinxtitleref{AccountUpdatedEvent}
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{DeactivateAccountCommand}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Handles the deactivation of an existing user account.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/accounts/deactivate}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{POST}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Body}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string, required): The ID of the account to be deactivated.
+\sphinxhyphen{} \sphinxtitleref{reason} (string, optional): Reason for deactivation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation that the account has been deactivated.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: \sphinxtitleref{AccountDeactivatedEvent}
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{VerifyAccountCommand}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Handles the verification process of a user account.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/accounts/verify}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{POST}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Body}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string, required): The ID of the account to be verified.
+\sphinxhyphen{} \sphinxtitleref{verificationDetails} (object, required): Details required for verification (e.g., verification code).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation that the account has been verified.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: \sphinxtitleref{AccountVerifiedEvent}
+
+\end{itemize}
+
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/accounts_summary_service:queries}}
+\sphinxAtStartPar
+\sphinxstylestrong{GetAccountSummaryQuery}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Retrieves a summary of a user account.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/accounts/summary}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{GET}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Parameters}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string, required): The ID of the account for which the summary is requested.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string): The ID of the account.
+\sphinxhyphen{} \sphinxtitleref{summary} (object): A brief summary of the account, including key details (e.g., account status, creation date).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: None
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{GetAccountDetailsQuery}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Fetches detailed information about a user account.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/accounts/details}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{GET}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Parameters}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string, required): The ID of the account for which details are requested.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{accountId} (string): The ID of the account.
+\sphinxhyphen{} \sphinxtitleref{details} (object): Detailed information about the account, including all associated data (e.g., user profile, activity log).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: None
+
+\end{itemize}
+
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/accounts_summary_service:inbox-events}}
+\sphinxAtStartPar
+The Accounts Summary Service processes the following inbox events:
+
+\sphinxAtStartPar
+\sphinxstylestrong{AccountCreatedEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after a new account is successfully created.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: Administration Concession Authorization Service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the system that a new account has been created, triggering further actions in other services (e.g., Concession Onboarding).
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{UserLoggedOutEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: An event that triggers when a user logs out of the system.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: Authorization Service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Updates the account summary to reflect the user’s last logout time.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{PasswordResetEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: An event that triggers when a user’s password is reset.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: Administration Concession Authorization Service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Updates the account summary with information about the password reset, including the timestamp and fingerprints any relevant security notes.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{TwoFactorAuthenticationMethodEnabledEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: An event that triggers when a users sets his 2fa to be anabled.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: Administration Concession Authorization Service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Updates the account summary with information about the 2fa method enabled for the user permission verification, including the timestamps and fingerprints. Also, thie event mey be believed to be redundant, as the infomration about the 2fa verificaition will also be available in the Claims generated from token.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{UserAssignedToPermissionsSetEvent/UserAssignedToRoleEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: And event from the Permission service in the case any manipulation with the user permission service happens.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Source}: Administration Concession Permission Service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Updates the account summary with information about the specific set of rht user’s permissions, including the timestamp and any relevant security notes. This is crutial for the query of Getting the User Entity with the speicific set of permission user have assigned, which will be updated be the message recieved from Permissions Service. to provide an optimistaion level for the Accounts Summary service in administration Concession system.
+
+\end{itemize}
+
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/accounts_summary_service:outbox-events}}
+\sphinxAtStartPar
+The Accounts Summary Service emits the following outbox events:
+
+\sphinxAtStartPar
+\sphinxstylestrong{AccountUpdatedEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after an account is successfully updated in comparisson to the previous account data.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: Administration Concession Event Bus, CRM event Bus, CRM System Leads summary service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the system of the account update, ensuring all related services have the most current account information.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{AccountDeactivatedEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after an account is deactivated.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: Administration Concession Event Bus, CRM System Leads summary service
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the system and associated services that the account has been deactivated, triggering any necessary follow\sphinxhyphen{}up actions.
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{AccountVerifiedEvent}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Emitted after an account is verified.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Destination}: Administration Concession Event Bus, CRM System
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Actions}: Notifies the Concessions System and CRM that the account has been verified, updating the status across all relevant services.
 
 \end{itemize}
 
