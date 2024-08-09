@@ -36,6 +36,12 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Regis
                 "Revokes a user's access token"
             )
             
+            refresh_access_token_command = Container(
+                "RefreshAccessTokenCommand",
+                "Command",
+                "Revokes deactivated user's access token"
+            )
+            
             reset_password_command = Container(
                 "ResetPasswordCommand",
                 "Command",
@@ -164,6 +170,7 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Regis
         auth_service >> Relationship("Handles") >> user_login_command
         auth_service >> Relationship("Handles") >> user_logout_command
         auth_service >> Relationship("Handles") >> revoke_access_token_command
+        auth_service >> Relationship("Handles") >> refresh_access_token_command
         auth_service >> Relationship("Handles") >> reset_password_command
         auth_service >> Relationship("Handles") >> enable_2fa_command
         auth_service >> Relationship("Handles") >> disable_2fa_command
@@ -173,6 +180,7 @@ with Diagram("Authorization Microservice - Detailed Container Diagram with Regis
         user_login_command >> Relationship("Executes business logic via") >> auth_service_logic
         user_logout_command >> Relationship("Executes business logic via") >> auth_service_logic
         revoke_access_token_command >> Relationship("Executes business logic via") >> auth_service_logic
+        refresh_access_token_command >> Relationship("Destroy access revoce destroy access token for user") >> auth_service_logic
         reset_password_command >> Relationship("Executes business logic via") >> auth_service_logic
         enable_2fa_command >> Relationship("Executes business logic via") >> auth_service_logic
         disable_2fa_command >> Relationship("Executes business logic via") >> auth_service_logic
