@@ -1,0 +1,135 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Administration Concession System}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Administration Concession System Authorization Service}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}API Documentation}{4}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Commands}{4}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Queries}{5}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Inbox Events}{6}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Outbox Events}{7}{subsection.1.1.5}%
+\contentsline {section}{\numberline {1.2}Authorization Service Database Documentation}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}UserDocument}{8}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}RefreshTokenDocument}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}UserResetTokenDocument}{9}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}PermissionsDocument}{9}{subsection.1.2.4}%
+\contentsline {section}{\numberline {1.3}Administration Concession System Accounts Summary Service}{10}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}API Documentation}{11}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Commands}{11}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Queries}{12}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Inbox Events}{12}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.3.5}Outbox Events}{13}{subsection.1.3.5}%
+\contentsline {section}{\numberline {1.4}Administration Concession System Internal Statistics Service}{13}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}API Documentation}{14}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Commands}{14}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Queries}{14}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Inbox Events}{14}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Outbox Events}{14}{subsection.1.4.5}%
+\contentsline {section}{\numberline {1.5}Internal Statistics Service Database Documentation}{14}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Administration Concession System External Statistics Service}{14}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}API Documentation}{15}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Commands}{15}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}Queries}{15}{subsection.1.6.3}%
+\contentsline {subsection}{\numberline {1.6.4}Inbox Events}{15}{subsection.1.6.4}%
+\contentsline {subsection}{\numberline {1.6.5}Outbox Events}{15}{subsection.1.6.5}%
+\contentsline {section}{\numberline {1.7}External Statistics Service Database Documentation}{15}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Administration Concession System Payments Service}{15}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}API Documentation}{17}{subsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8.2}Commands}{17}{subsection.1.8.2}%
+\contentsline {subsection}{\numberline {1.8.3}Queries}{17}{subsection.1.8.3}%
+\contentsline {subsection}{\numberline {1.8.4}Inbox Events}{17}{subsection.1.8.4}%
+\contentsline {subsection}{\numberline {1.8.5}Outbox Events}{17}{subsection.1.8.5}%
+\contentsline {section}{\numberline {1.9}Payments Service Database Documentation}{17}{section.1.9}%
+\contentsline {section}{\numberline {1.10}Administration Concession System Permissions Service}{17}{section.1.10}%
+\contentsline {subsection}{\numberline {1.10.1}API Documentation}{18}{subsection.1.10.1}%
+\contentsline {subsection}{\numberline {1.10.2}Commands}{18}{subsection.1.10.2}%
+\contentsline {subsection}{\numberline {1.10.3}Queries}{18}{subsection.1.10.3}%
+\contentsline {subsection}{\numberline {1.10.4}Inbox Events}{18}{subsection.1.10.4}%
+\contentsline {subsection}{\numberline {1.10.5}Outbox Events}{18}{subsection.1.10.5}%
+\contentsline {section}{\numberline {1.11}Permissions Service Database Documentation}{18}{section.1.11}%
+\contentsline {section}{\numberline {1.12}Administration Concession System Tasks Summary Service}{18}{section.1.12}%
+\contentsline {subsection}{\numberline {1.12.1}API Documentation}{19}{subsection.1.12.1}%
+\contentsline {subsection}{\numberline {1.12.2}Commands}{19}{subsection.1.12.2}%
+\contentsline {subsection}{\numberline {1.12.3}Queries}{19}{subsection.1.12.3}%
+\contentsline {subsection}{\numberline {1.12.4}Inbox Events}{19}{subsection.1.12.4}%
+\contentsline {subsection}{\numberline {1.12.5}Outbox Events}{19}{subsection.1.12.5}%
+\contentsline {section}{\numberline {1.13}Tasks Summary Service Database Documentation}{19}{section.1.13}%
+\contentsline {section}{\numberline {1.14}Administration Concession System Payments Service}{19}{section.1.14}%
+\contentsline {subsection}{\numberline {1.14.1}API Documentation}{20}{subsection.1.14.1}%
+\contentsline {subsection}{\numberline {1.14.2}Commands}{20}{subsection.1.14.2}%
+\contentsline {subsection}{\numberline {1.14.3}Queries}{20}{subsection.1.14.3}%
+\contentsline {subsection}{\numberline {1.14.4}Inbox Events}{20}{subsection.1.14.4}%
+\contentsline {subsection}{\numberline {1.14.5}Outbox Events}{20}{subsection.1.14.5}%
+\contentsline {section}{\numberline {1.15}Payments Service Database Documentation}{20}{section.1.15}%
+\contentsline {section}{\numberline {1.16}Administration Concession Internal Operations Log Service}{20}{section.1.16}%
+\contentsline {subsection}{\numberline {1.16.1}API Documentation}{21}{subsection.1.16.1}%
+\contentsline {subsection}{\numberline {1.16.2}Commands}{21}{subsection.1.16.2}%
+\contentsline {subsection}{\numberline {1.16.3}Queries}{21}{subsection.1.16.3}%
+\contentsline {subsection}{\numberline {1.16.4}Inbox Events}{21}{subsection.1.16.4}%
+\contentsline {subsection}{\numberline {1.16.5}Outbox Events}{21}{subsection.1.16.5}%
+\contentsline {section}{\numberline {1.17}Concession Internal Operations Log Service Database Documentation}{21}{section.1.17}%
+\contentsline {chapter}{\numberline {2}CRM System}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}CRM System Authorization Service}{23}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}API Documentation}{24}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Commands}{24}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Queries}{25}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Inbox Events}{26}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Outbox Events}{27}{subsection.2.1.5}%
+\contentsline {section}{\numberline {2.2}Authorization Service Database Documentation}{28}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}UserDocument}{28}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}RefreshTokenDocument}{29}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}UserResetTokenDocument}{29}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}PermissionsDocument}{29}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}CRM System Accounts Summary Service}{30}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}API Documentation}{31}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Commands}{31}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Queries}{32}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Inbox Events}{32}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Outbox Events}{33}{subsection.2.3.5}%
+\contentsline {section}{\numberline {2.4}CRM System Internal Statistics Service}{33}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}API Documentation}{34}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Commands}{34}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Queries}{34}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Inbox Events}{34}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Outbox Events}{34}{subsection.2.4.5}%
+\contentsline {section}{\numberline {2.5}Internal Statistics Service Database Documentation}{34}{section.2.5}%
+\contentsline {section}{\numberline {2.6}CRM System External Statistics Service}{34}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}API Documentation}{35}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Commands}{35}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Queries}{35}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Inbox Events}{35}{subsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.6.5}Outbox Events}{35}{subsection.2.6.5}%
+\contentsline {section}{\numberline {2.7}External Statistics Service Database Documentation}{35}{section.2.7}%
+\contentsline {section}{\numberline {2.8}CRM System Payments Service}{35}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}API Documentation}{37}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Commands}{37}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}Queries}{37}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Inbox Events}{37}{subsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.8.5}Outbox Events}{37}{subsection.2.8.5}%
+\contentsline {section}{\numberline {2.9}Payments Service Database Documentation}{37}{section.2.9}%
+\contentsline {section}{\numberline {2.10}CRM System Permissions Service}{37}{section.2.10}%
+\contentsline {subsection}{\numberline {2.10.1}API Documentation}{38}{subsection.2.10.1}%
+\contentsline {subsection}{\numberline {2.10.2}Commands}{38}{subsection.2.10.2}%
+\contentsline {subsection}{\numberline {2.10.3}Queries}{38}{subsection.2.10.3}%
+\contentsline {subsection}{\numberline {2.10.4}Inbox Events}{38}{subsection.2.10.4}%
+\contentsline {subsection}{\numberline {2.10.5}Outbox Events}{38}{subsection.2.10.5}%
+\contentsline {section}{\numberline {2.11}Permissions Service Database Documentation}{38}{section.2.11}%
+\contentsline {section}{\numberline {2.12}CRM System Tasks Summary Service}{38}{section.2.12}%
+\contentsline {subsection}{\numberline {2.12.1}API Documentation}{39}{subsection.2.12.1}%
+\contentsline {subsection}{\numberline {2.12.2}Commands}{39}{subsection.2.12.2}%
+\contentsline {subsection}{\numberline {2.12.3}Queries}{39}{subsection.2.12.3}%
+\contentsline {subsection}{\numberline {2.12.4}Inbox Events}{39}{subsection.2.12.4}%
+\contentsline {subsection}{\numberline {2.12.5}Outbox Events}{39}{subsection.2.12.5}%
+\contentsline {section}{\numberline {2.13}Tasks Summary Service Database Documentation}{39}{section.2.13}%
+\contentsline {section}{\numberline {2.14}CRM System Payments Service}{39}{section.2.14}%
+\contentsline {subsection}{\numberline {2.14.1}API Documentation}{40}{subsection.2.14.1}%
+\contentsline {subsection}{\numberline {2.14.2}Commands}{40}{subsection.2.14.2}%
+\contentsline {subsection}{\numberline {2.14.3}Queries}{40}{subsection.2.14.3}%
+\contentsline {subsection}{\numberline {2.14.4}Inbox Events}{40}{subsection.2.14.4}%
+\contentsline {subsection}{\numberline {2.14.5}Outbox Events}{40}{subsection.2.14.5}%
+\contentsline {section}{\numberline {2.15}Payments Service Database Documentation}{40}{section.2.15}%
+\contentsline {section}{\numberline {2.16}CRM Internal Operations Log Service}{40}{section.2.16}%
+\contentsline {subsection}{\numberline {2.16.1}API Documentation}{41}{subsection.2.16.1}%
+\contentsline {subsection}{\numberline {2.16.2}Commands}{41}{subsection.2.16.2}%
+\contentsline {subsection}{\numberline {2.16.3}Queries}{41}{subsection.2.16.3}%
+\contentsline {subsection}{\numberline {2.16.4}Inbox Events}{41}{subsection.2.16.4}%
+\contentsline {subsection}{\numberline {2.16.5}Outbox Events}{41}{subsection.2.16.5}%
+\contentsline {section}{\numberline {2.17}Concession Internal Operations Log Service Database Documentation}{41}{section.2.17}%
