@@ -64,7 +64,7 @@
 
 
 \title{CRMLXRMS Labs}
-\date{Aug 08, 2024}
+\date{Aug 09, 2024}
 \release{}
 \author{Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -98,8 +98,8 @@ documentation for details.
 \sphinxstepscope
 
 
-\section{Authorization Service}
-\label{\detokenize{administration_concession_system/authorization_service:authorization-service}}\label{\detokenize{administration_concession_system/authorization_service::doc}}
+\section{Administration Concession System Authorization Service}
+\label{\detokenize{administration_concession_system/authorization_service:administration-concession-system-authorization-service}}\label{\detokenize{administration_concession_system/authorization_service::doc}}
 \sphinxAtStartPar
 The Authorization Microservice is a core component of the Administration Concession System. It handles authentication, authorization, and user management processes, which are essential for maintaining secure access and operational control. This microservice also integrates with the CRM system to share user data and operational events.
 
@@ -167,6 +167,37 @@ The Authorization Microservice is a core component of the Administration Concess
 \sphinxAtStartPar
 \sphinxstylestrong{Response}:
 \sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation message that the user has been logged out.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Events Triggered}: \sphinxtitleref{UserLoggedOutEvent}
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{RevokeAccessTokenCommand}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Description}: Revokes a user’s access token, invalidating their current session.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request URL}: \sphinxtitleref{/api/auth/revoke\sphinxhyphen{}token}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Method}: \sphinxtitleref{POST}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Request Body}:
+\sphinxhyphen{} \sphinxtitleref{token} (string, required): The access token to be revoked.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+\sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation message that the token has been revoked.
 
 \item {} 
 \sphinxAtStartPar
@@ -324,7 +355,7 @@ The Authorization Microservice is a core component of the Administration Concess
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Response}:
-\sphinxhyphen{} \sphinxtitleref{message} (string): Confirmation that the concession has been registered.
+\sphinxhyphen{} \sphinxtitleref{message} (string): 200 \textendash{} Confirmation that the concession has been registered.
 
 \item {} 
 \sphinxAtStartPar
@@ -635,11 +666,174 @@ The Authorization Microservice emits the following outbox events:
 
 \end{itemize}
 
+
+\section{Authorization Service Database Documentation}
+\label{\detokenize{administration_concession_system/authorization_service:authorization-service-database-documentation}}
+\sphinxAtStartPar
+The \sphinxtitleref{Authorization Service} manages the storage and retrieval of authentication, authorization, and user management data within the Administration Concession System. The database contains several key documents that are essential for handling user identities, permissions, and authentication mechanisms.
+
+
+\subsection{UserDocument}
+\label{\detokenize{administration_concession_system/authorization_service:userdocument}}
+\sphinxAtStartPar
+Represents the core information related to a user in the system. This document is essential for managing user authentication, authorization, and profile details.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Id}: \sphinxtitleref{Guid}
+\sphinxhyphen{} Unique identifier for the user.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Username}: \sphinxtitleref{string}
+\sphinxhyphen{} The username chosen by the user.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Email}: \sphinxtitleref{string}
+\sphinxhyphen{} The email address associated with the user’s account.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Role}: \sphinxtitleref{string}
+\sphinxhyphen{} The role assigned to the user (e.g., \sphinxtitleref{Admin}, \sphinxtitleref{User}).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{PasswordHash}: \sphinxtitleref{string}
+\sphinxhyphen{} The hashed password for the user’s account.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CreatedAt}: \sphinxtitleref{DateTime}
+\sphinxhyphen{} The timestamp when the user account was created.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{IsEmailVerified}: \sphinxtitleref{bool}
+\sphinxhyphen{} Indicates whether the user’s email has been verified.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{EmailVerificationToken}: \sphinxtitleref{string}
+\sphinxhyphen{} The token used for verifying the user’s email address.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{EmailVerifiedAt}: \sphinxtitleref{DateTime?}
+\sphinxhyphen{} The timestamp when the user’s email was verified.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{IsTwoFactorEnabled}: \sphinxtitleref{bool}
+\sphinxhyphen{} Indicates whether Two\sphinxhyphen{}Factor Authentication (2FA) is enabled for the user.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{TwoFactorSecret}: \sphinxtitleref{string}
+\sphinxhyphen{} The secret key used for generating 2FA codes.
+
+\end{itemize}
+
+
+\subsection{RefreshTokenDocument}
+\label{\detokenize{administration_concession_system/authorization_service:refreshtokendocument}}
+\sphinxAtStartPar
+Stores the refresh tokens associated with a user’s session. These tokens are used to renew access tokens without requiring the user to re\sphinxhyphen{}authenticate.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Id}: \sphinxtitleref{Guid}
+\sphinxhyphen{} Unique identifier for the refresh token.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{UserId}: \sphinxtitleref{Guid}
+\sphinxhyphen{} The identifier of the user to whom the refresh token belongs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Token}: \sphinxtitleref{string}
+\sphinxhyphen{} The actual refresh token value.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{CreatedAt}: \sphinxtitleref{DateTime}
+\sphinxhyphen{} The timestamp when the refresh token was created.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{RevokedAt}: \sphinxtitleref{DateTime?}
+\sphinxhyphen{} The timestamp when the refresh token was revoked (if applicable).
+
+\end{itemize}
+
+
+\subsection{UserResetTokenDocument}
+\label{\detokenize{administration_concession_system/authorization_service:userresettokendocument}}
+\sphinxAtStartPar
+Manages the tokens used for resetting a user’s password. This document is crucial for handling the password reset flow securely.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Id}: \sphinxtitleref{Guid}
+\sphinxhyphen{} Unique identifier for the reset token.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{UserId}: \sphinxtitleref{Guid}
+\sphinxhyphen{} The identifier of the user requesting the password reset.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ResetToken}: \sphinxtitleref{string}
+\sphinxhyphen{} The token sent to the user for resetting their password.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ResetTokenExpires}: \sphinxtitleref{DateTime?}
+\sphinxhyphen{} The expiration timestamp for the reset token.
+
+\end{itemize}
+
+
+\subsection{PermissionsDocument}
+\label{\detokenize{administration_concession_system/authorization_service:permissionsdocument}}
+\sphinxAtStartPar
+Represents the permissions that a user has within the system. This document is crucial for determining the specific actions a user is allowed to perform based on the roles and permissions assigned to them.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Id}: \sphinxtitleref{Guid}
+\sphinxhyphen{} Unique identifier for the permission entry.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{UserId}: \sphinxtitleref{Guid}
+\sphinxhyphen{} The identifier of the user to whom the permissions belong.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Permissions}: \sphinxtitleref{IEnumerable\textless{}string\textgreater{}}
+\sphinxhyphen{} A list of permission strings that define the actions the user is allowed to perform (e.g., \sphinxtitleref{ViewDashboard}, \sphinxtitleref{EditConcession}, \sphinxtitleref{ManageUsers}).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{AssignedAt}: \sphinxtitleref{DateTime}
+\sphinxhyphen{} The timestamp when these permissions were assigned to the user.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ExpiresAt}: \sphinxtitleref{DateTime?}
+\sphinxhyphen{} The optional timestamp indicating when these permissions expire (if applicable).
+
+\end{itemize}
+
 \sphinxstepscope
 
 
-\section{Accounts Summary Service}
-\label{\detokenize{administration_concession_system/accounts_summary_service:accounts-summary-service}}\label{\detokenize{administration_concession_system/accounts_summary_service::doc}}
+\section{Administration Concession System Accounts Summary Service}
+\label{\detokenize{administration_concession_system/accounts_summary_service:administration-concession-system-accounts-summary-service}}\label{\detokenize{administration_concession_system/accounts_summary_service::doc}}
 \sphinxAtStartPar
 The Accounts Summary Service is an integral component of the Administration Concession System, designed to manage and provide a summary of administration concession user accounts. This service facilitates various operations related to accounts, including creation, updates, permissions updates, deactivation, and verification. It also supports queries for retrieving account summaries and detailed account information.
 The permission synchronization will hapeent through the permission service: after user with the corresponding permission will create the pecific user role with the specific permission assignt the permissions set and the role to the specific user the corresponding repository in the studnet service will be udpated do to inbox event from permission service. This optimisation is required for the not biased http request. However, in this case, the one more problem appears: for the moment the service with permissions is not available there will not be possible to provide any permission update for the specific role. For this time to situation when the new user has been created accured after the Permission Service will be available there should be a check available and additional outbox evnet publiching for such sort of situations. Theoretically, also thie situation should be in qute informative way described in the Permission service of the Administration Concesstion system.
@@ -996,6 +1190,174 @@ The Accounts Summary Service emits the following outbox events:
 
 \end{itemize}
 
+\sphinxstepscope
+
+
+\section{Administration Concession System Internal Statistics Service}
+\label{\detokenize{administration_concession_system/internal_satistics_service:administration-concession-system-internal-statistics-service}}\label{\detokenize{administration_concession_system/internal_satistics_service::doc}}
+\sphinxAtStartPar
+The Intrnal Statistics Microservice is responsible for handling recieving and saving  the CRM Intrnal Statistics Service data: services distribution, situation characteristics, current leads summary tendency, general leads tandency
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/internal_satistics_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/internal_satistics_service:commands}}
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/internal_satistics_service:queries}}
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/internal_satistics_service:inbox-events}}
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/internal_satistics_service:outbox-events}}
+
+\section{Internal Statistics Service Database Documentation}
+\label{\detokenize{administration_concession_system/internal_satistics_service:internal-statistics-service-database-documentation}}
+\sphinxstepscope
+
+
+\section{Administration Concession System External Statistics Service}
+\label{\detokenize{administration_concession_system/external_statistics_service:administration-concession-system-external-statistics-service}}\label{\detokenize{administration_concession_system/external_statistics_service::doc}}
+\sphinxAtStartPar
+The External  Statistics Microservice is responsible for handling recieving From External Statistics service Of CRM connected to the shole Data procession Mining, Procession and analysis Machine, concession related statistics with regression analysis of behaviour, predictions. hypothesis verification, decission for the specific clinet’s concessionices.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/external_statistics_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/external_statistics_service:commands}}
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/external_statistics_service:queries}}
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/external_statistics_service:inbox-events}}
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/external_statistics_service:outbox-events}}
+
+\section{External Statistics Service Database Documentation}
+\label{\detokenize{administration_concession_system/external_statistics_service:external-statistics-service-database-documentation}}
+\sphinxstepscope
+
+
+\section{Administration Concession System Payments Service}
+\label{\detokenize{administration_concession_system/payments_service:administration-concession-system-payments-service}}\label{\detokenize{administration_concession_system/payments_service::doc}}
+\sphinxAtStartPar
+The  Payments Microservice is responsible for handing the data related to payments for the specific ordes for the leads recieved from the CRM Payments service (CRM payments service will be connected to the CFM Orders servcie and the CRM Facturation service and the CRM Leads Summary servcie)
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/payments_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/payments_service:commands}}
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/payments_service:queries}}
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/payments_service:inbox-events}}
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/payments_service:outbox-events}}
+
+\section{Payments Service Database Documentation}
+\label{\detokenize{administration_concession_system/payments_service:payments-service-database-documentation}}
+\sphinxstepscope
+
+
+\section{Administration Concession System Permissions Service}
+\label{\detokenize{administration_concession_system/permissions_service:administration-concession-system-permissions-service}}\label{\detokenize{administration_concession_system/permissions_service::doc}}
+\sphinxAtStartPar
+The Permission Microservice is responsible for handing the any actions with the permission related issues: creation the roles (out of permission set), defining the element of permissions set with the correspongin accesses. Thie Servcie will be also integrated with the CRM Leads summary servcie and CRM Permission service as theoretically the permisision assigned to the manager of the concesison system are also the permission of the userd from the crm assigned to serving Administration Concession System.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/permissions_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/permissions_service:commands}}
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/permissions_service:queries}}
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/permissions_service:inbox-events}}
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/permissions_service:outbox-events}}
+
+\section{Permissions Service Database Documentation}
+\label{\detokenize{administration_concession_system/permissions_service:permissions-service-database-documentation}}
+\sphinxstepscope
+
+
+\section{Administration Concession System Tasks Summary Service}
+\label{\detokenize{administration_concession_system/tasks_summary_service:administration-concession-system-tasks-summary-service}}\label{\detokenize{administration_concession_system/tasks_summary_service::doc}}
+\sphinxAtStartPar
+The Tasks Summary service is a sort of the PRO\sphinxhyphen{}User services. This service is responsible for handling the data reltated to the tasks set to users or assigned by users or tries to be organizes by users. Is synchonized with the CRM Task Summary Servcie.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/tasks_summary_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/tasks_summary_service:commands}}
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/tasks_summary_service:queries}}
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/tasks_summary_service:inbox-events}}
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/tasks_summary_service:outbox-events}}
+
+\section{Tasks Summary Service Database Documentation}
+\label{\detokenize{administration_concession_system/tasks_summary_service:tasks-summary-service-database-documentation}}
+\sphinxstepscope
+
+
+\section{Administration Concession System Payments Service}
+\label{\detokenize{administration_concession_system/orders_service:administration-concession-system-payments-service}}\label{\detokenize{administration_concession_system/orders_service::doc}}
+\sphinxAtStartPar
+The Orders Statistics Microservice is responsible for handling recieving the orders related data from the CRM Orders service.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand}.png}\hspace*{\fill}}
+
+
+\subsection{API Documentation}
+\label{\detokenize{administration_concession_system/orders_service:api-documentation}}
+
+\subsection{Commands}
+\label{\detokenize{administration_concession_system/orders_service:commands}}
+
+\subsection{Queries}
+\label{\detokenize{administration_concession_system/orders_service:queries}}
+
+\subsection{Inbox Events}
+\label{\detokenize{administration_concession_system/orders_service:inbox-events}}
+
+\subsection{Outbox Events}
+\label{\detokenize{administration_concession_system/orders_service:outbox-events}}
+
+\section{Payments Service Database Documentation}
+\label{\detokenize{administration_concession_system/orders_service:payments-service-database-documentation}}
 \sphinxstepscope
 
 

@@ -6,4 +6,9 @@ Administration Concession System
 
    authorization_service
    accounts_summary_service
-   other_services  # Include any other files you might create
+   internal_satistics_service
+   external_statistics_service
+   payments_service
+   permissions_service
+   tasks_summary_service
+   orders_service

@@ -1,5 +1,5 @@
-Authorization Service
-======================
+Administration Concession System Authorization Service
+========================================================
 
 The Authorization Microservice is a core component of the Administration Concession System. It handles authentication, authorization, and user management processes, which are essential for maintaining secure access and operational control. This microservice also integrates with the CRM system to share user data and operational events.
 

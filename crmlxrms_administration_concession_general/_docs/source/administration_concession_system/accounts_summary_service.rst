@@ -1,5 +1,5 @@
-Accounts Summary Service
-=========================
+Administration Concession System Accounts Summary Service
+==========================================================
 
 The Accounts Summary Service is an integral component of the Administration Concession System, designed to manage and provide a summary of administration concession user accounts. This service facilitates various operations related to accounts, including creation, updates, permissions updates, deactivation, and verification. It also supports queries for retrieving account summaries and detailed account information.
 The permission synchronization will hapeent through the permission service: after user with the corresponding permission will create the pecific user role with the specific permission assignt the permissions set and the role to the specific user the corresponding repository in the studnet service will be udpated do to inbox event from permission service. This optimisation is required for the not biased http request. However, in this case, the one more problem appears: for the moment the service with permissions is not available there will not be possible to provide any permission update for the specific role. For this time to situation when the new user has been created accured after the Permission Service will be available there should be a check available and additional outbox evnet publiching for such sort of situations. Theoretically, also thie situation should be in qute informative way described in the Permission service of the Administration Concesstion system.

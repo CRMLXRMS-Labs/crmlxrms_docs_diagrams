@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.7.29)  6 AUG 2024 03:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.7.29)  9 AUG 2024 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,7 +887,7 @@ File: t1txtt.fd 2000/12/15 v3.1
 ]
 Chapter 1.
 <authorization_microservice_-_detailed_container_diagram_with_registerconcessio
-ncommand.png, id=66, 2899.08093pt x 2194.44844pt>
+ncommand.png, id=74, 2899.08093pt x 2194.44844pt>
 File: authorization_microservice_-_detailed_container_diagram_with_registerconc
 essioncommand.png Graphic file (type png)
 <use authorization_microservice_-_detailed_container_diagram_with_registerconce
@@ -914,13 +914,94 @@ File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 [7]
 
 [8]
+
+[9]
+<accounts_summary_service_-_complex_container_diagram.png, id=114, 2402.9775pt 
+x 1664.46844pt>
+File: accounts_summary_service_-_complex_container_diagram.png Graphic file (ty
+pe png)
+<use accounts_summary_service_-_complex_container_diagram.png>
+Package pdftex.def Info: accounts_summary_service_-_complex_container_diagram.p
+ng  used on input line 841.
+(pdftex.def)             Requested size: 469.73372pt x 325.37007pt.
+
+
+[10 <./accounts_summary_service_-_complex_container_diagram.png>]
+
+[11]
+
+[12]
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 1201.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[13]
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 1229.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[14]
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 1257.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[15]
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 1285.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[16]
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 1313.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[17]
+File: authorization_microservice_-_detailed_container_diagram_with_registerconc
+essioncommand.png Graphic file (type png)
+<use authorization_microservice_-_detailed_container_diagram_with_registerconce
+ssioncommand.png>
+Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
+m_with_registerconcessioncommand.png  used on input line 1341.
+(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+
+
+[18]
+
+[19]
+
+[20
+
+]
 Chapter 2.
 No file crmlxrmslabs.ind.
 
 
-[9
-
-] (./crmlxrmslabs.aux)
+[21] (./crmlxrmslabs.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
@@ -935,25 +1016,25 @@ Package rerunfilecheck Warning: File `crmlxrmslabs.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `crmlxrmslabs.out':
-(rerunfilecheck)             Before: 7FD6E8AD7497CE074E44B5D56876A253;813
-(rerunfilecheck)             After:  9C7781543F1A1538DB91289395EA4868;1066.
+(rerunfilecheck)             Before: 9C7781543F1A1538DB91289395EA4868;1066
+(rerunfilecheck)             After:  56E55623408A555011562B67C1977C6C;10499.
  ) 
 Here is how much of TeX's memory you used:
- 16519 strings out of 475544
- 275070 string characters out of 5777741
- 1941905 words of memory out of 5000000
- 38764 multiletter control sequences out of 15000+600000
+ 16655 strings out of 475544
+ 281216 string characters out of 5777741
+ 1940905 words of memory out of 5000000
+ 38835 multiletter control sequences out of 15000+600000
  608304 words of font info for 74 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,11n,79p,365b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,11n,79p,1001b,554s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf/font
 s/type1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/
 qtmr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on crmlxrmslabs.pdf (13 pages, 459730 bytes).
+Output written on crmlxrmslabs.pdf (25 pages, 679226 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 103 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
- 74 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 259 PDF objects out of 1000 (max. 8388607)
+ 214 compressed objects within 3 object streams
+ 87 named destinations out of 1000 (max. 500000)
+ 95 words of extra memory for PDF output out of 10000 (max. 10000000)
 
