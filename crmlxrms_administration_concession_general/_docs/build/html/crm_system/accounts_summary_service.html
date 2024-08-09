@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Administration Concession System Accounts Summary Service &#8212; CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling  documentation</title>
+    <title>CRM System Accounts Summary Service &#8212; CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
@@ -14,8 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Administration Concession System Internal Statistics Service" href="internal_satistics_service.html" />
-    <link rel="prev" title="Administration Concession System Authorization Service" href="authorization_service.html" />
+    <link rel="next" title="CRM System Internal Statistics Service" href="internal_satistics_service.html" />
+    <link rel="prev" title="CRM System Authorization Service" href="authorization_service.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,9 +33,9 @@
 
           <div class="body" role="main">
             
-  <section id="administration-concession-system-accounts-summary-service">
-<h1>Administration Concession System Accounts Summary Service<a class="headerlink" href="#administration-concession-system-accounts-summary-service" title="Link to this heading">¶</a></h1>
-<p>The Accounts Summary Service is an integral component of the Administration Concession System, designed to manage and provide a summary of administration concession user accounts. This service facilitates various operations related to accounts, including creation, updates, permissions updates, deactivation, and verification. It also supports queries for retrieving account summaries and detailed account information.
+  <section id="crm-system-accounts-summary-service">
+<h1>CRM System Accounts Summary Service<a class="headerlink" href="#crm-system-accounts-summary-service" title="Link to this heading">¶</a></h1>
+<p>The Accounts Summary Service is an integral component of the CRM System, designed to manage and provide a summary of CRM user accounts. This service facilitates various operations related to accounts, including creation, updates, permissions updates, deactivation, and verification. It also supports queries for retrieving account summaries and detailed account information.
 The permission synchronization will hapeent through the permission service: after user with the corresponding permission will create the pecific user role with the specific permission assignt the permissions set and the role to the specific user the corresponding repository in the studnet service will be udpated do to inbox event from permission service. This optimisation is required for the not biased http request. However, in this case, the one more problem appears: for the moment the service with permissions is not available there will not be possible to provide any permission update for the specific role. For this time to situation when the new user has been created accured after the Permission Service will be available there should be a check available and additional outbox evnet publiching for such sort of situations. Theoretically, also thie situation should be in qute informative way described in the Permission service of the Administration Concesstion system.</p>
 <img alt="Complex Container Diagram of Accounts Summary Service" class="align-center" src="../_images/accounts_summary_service_-_complex_container_diagram.png" />
 <section id="api-documentation">
@@ -126,7 +126,7 @@ The permission synchronization will hapeent through the permission service: afte
 <p><strong>AccountCreatedEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: Emitted after a new account is successfully created.</p></li>
-<li><p><strong>Source</strong>: Administration Concession Authorization Service</p></li>
+<li><p><strong>Source</strong>: CRM Authorization Service</p></li>
 <li><p><strong>Actions</strong>: Notifies the system that a new account has been created, triggering further actions in other services (e.g., Concession Onboarding).</p></li>
 </ul>
 <p><strong>UserLoggedOutEvent</strong></p>
@@ -138,20 +138,20 @@ The permission synchronization will hapeent through the permission service: afte
 <p><strong>PasswordResetEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: An event that triggers when a user’s password is reset.</p></li>
-<li><p><strong>Source</strong>: Administration Concession Authorization Service</p></li>
+<li><p><strong>Source</strong>: CRM Authorization Service</p></li>
 <li><p><strong>Actions</strong>: Updates the account summary with information about the password reset, including the timestamp and fingerprints any relevant security notes.</p></li>
 </ul>
 <p><strong>TwoFactorAuthenticationMethodEnabledEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: An event that triggers when a users sets his 2fa to be anabled.</p></li>
-<li><p><strong>Source</strong>: Administration Concession Authorization Service</p></li>
+<li><p><strong>Source</strong>: CRM Authorization Service</p></li>
 <li><p><strong>Actions</strong>: Updates the account summary with information about the 2fa method enabled for the user permission verification, including the timestamps and fingerprints. Also, thie event mey be believed to be redundant, as the infomration about the 2fa verificaition will also be available in the Claims generated from token.</p></li>
 </ul>
 <p><strong>UserAssignedToPermissionsSetEvent/UserAssignedToRoleEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: And event from the Permission service in the case any manipulation with the user permission service happens.</p></li>
-<li><p><strong>Source</strong>: Administration Concession Permission Service</p></li>
-<li><p><strong>Actions</strong>: Updates the account summary with information about the specific set of rht user’s permissions, including the timestamp and any relevant security notes. This is crutial for the query of Getting the User Entity with the speicific set of permission user have assigned, which will be updated be the message recieved from Permissions Service. to provide an optimistaion level for the Accounts Summary service in administration Concession system.</p></li>
+<li><p><strong>Source</strong>: CRM Permission Service</p></li>
+<li><p><strong>Actions</strong>: Updates the account summary with information about the specific set of rht user’s permissions, including the timestamp and any relevant security notes. This is crutial for the query of Getting the User Entity with the speicific set of permission user have assigned, which will be updated be the message recieved from Permissions Service. to provide an optimistaion level for the Accounts Summary service in CRM system.</p></li>
 </ul>
 </section>
 <section id="outbox-events">
@@ -160,19 +160,19 @@ The permission synchronization will hapeent through the permission service: afte
 <p><strong>AccountUpdatedEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: Emitted after an account is successfully updated in comparisson to the previous account data.</p></li>
-<li><p><strong>Destination</strong>: Administration Concession Event Bus, CRM event Bus, CRM System Leads summary service</p></li>
+<li><p><strong>Destination</strong>: CRM Event Bus, CRM event Bus, CRM System Leads summary service</p></li>
 <li><p><strong>Actions</strong>: Notifies the system of the account update, ensuring all related services have the most current account information.</p></li>
 </ul>
 <p><strong>AccountDeactivatedEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: Emitted after an account is deactivated.</p></li>
-<li><p><strong>Destination</strong>: Administration Concession Event Bus, CRM System Leads summary service</p></li>
+<li><p><strong>Destination</strong>: CRM Event Bus, CRM System Leads summary service</p></li>
 <li><p><strong>Actions</strong>: Notifies the system and associated services that the account has been deactivated, triggering any necessary follow-up actions.</p></li>
 </ul>
 <p><strong>AccountVerifiedEvent</strong></p>
 <ul class="simple">
 <li><p><strong>Description</strong>: Emitted after an account is verified.</p></li>
-<li><p><strong>Destination</strong>: Administration Concession Event Bus, CRM System</p></li>
+<li><p><strong>Destination</strong>: CRM Event Bus, CRM System</p></li>
 <li><p><strong>Actions</strong>: Notifies the Concessions System and CRM that the account has been verified, updating the status across all relevant services.</p></li>
 </ul>
 </section>
@@ -206,36 +206,36 @@ The permission synchronization will hapeent through the permission service: afte
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Administration Concession System</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="authorization_service.html">Administration Concession System Authorization Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration_concession_system/index.html">Administration Concession System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CRM System</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html">CRM System Authorization Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="authorization_service.html#authorization-service-database-documentation">Authorization Service Database Documentation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Administration Concession System Accounts Summary Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html">Administration Concession System Internal Statistics Service</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CRM System Accounts Summary Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html">CRM System Internal Statistics Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#internal-statistics-service-database-documentation">Internal Statistics Service Database Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html">Administration Concession System External Statistics Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html">CRM System External Statistics Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#external-statistics-service-database-documentation">External Statistics Service Database Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="payments_service.html">Administration Concession System Payments Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html">CRM System Payments Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="payments_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="permissions_service.html">Administration Concession System Permissions Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html">CRM System Permissions Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="permissions_service.html#permissions-service-database-documentation">Permissions Service Database Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html">Administration Concession System Tasks Summary Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html">CRM System Tasks Summary Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#tasks-summary-service-database-documentation">Tasks Summary Service Database Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="orders_service.html">Administration Concession System Payments Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html">CRM System Payments Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="orders_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html">Administration Concession Internal Operations Log Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html">CRM Internal Operations Log Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#concession-internal-operations-log-service-database-documentation">Concession Internal Operations Log Service Database Documentation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../crm_system/index.html">CRM System</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">Administration Concession System</a><ul>
-      <li>Previous: <a href="authorization_service.html" title="previous chapter">Administration Concession System Authorization Service</a></li>
-      <li>Next: <a href="internal_satistics_service.html" title="next chapter">Administration Concession System Internal Statistics Service</a></li>
+  <li><a href="index.html">CRM System</a><ul>
+      <li>Previous: <a href="authorization_service.html" title="previous chapter">CRM System Authorization Service</a></li>
+      <li>Next: <a href="internal_satistics_service.html" title="next chapter">CRM System Internal Statistics Service</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -260,7 +260,7 @@ The permission synchronization will hapeent through the permission service: afte
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
-      <a href="../_sources/administration_concession_system/accounts_summary_service.rst.txt"
+      <a href="../_sources/crm_system/accounts_summary_service.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

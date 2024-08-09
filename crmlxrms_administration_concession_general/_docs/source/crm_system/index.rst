@@ -5,4 +5,11 @@ CRM System
    :maxdepth: 2
 
    authorization_service
-   crm_service_2  # Include any other files you might create
+   accounts_summary_service
+   internal_satistics_service
+   external_statistics_service
+   payments_service
+   permissions_service
+   tasks_summary_service
+   orders_service
+   internal_operations_log_service
