@@ -81,4 +81,6 @@ To generate the diagrams, you need to install the dependencies listed in `requir
 
 ```bash
 pip install -r requirements.txt
+# please do not forget to install the theme
+pip install sphinx-wagtail-theme
 ```
