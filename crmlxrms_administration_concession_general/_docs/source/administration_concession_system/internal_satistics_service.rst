@@ -5,7 +5,7 @@ The Intrnal Statistics Microservice is responsible for handling recieving and sa
 
 
 
-.. image:: ../_static/administration_concession_system/services_administration_concession_system/authorisation_service/container/authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand.png
+.. image:: ../_static/administration_concession_system/services_administration_concession_system/internal_statistics_service/container/internal_statistics_service_-_container_diagram.png
    :alt: Detailed Container Diagram of Administration Concession Internal Statistics Microservice
    :align: center
  

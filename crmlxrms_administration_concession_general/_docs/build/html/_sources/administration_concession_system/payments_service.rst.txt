@@ -5,7 +5,7 @@ The  Payments Microservice is responsible for handing the data related to paymen
 
 
 
-.. image:: ../_static/administration_concession_system/services_administration_concession_system/authorisation_service/container/authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand.png
+.. image:: ../_static/administration_concession_system/services_administration_concession_system/payments_service/container/payments_service_-_container_diagram.png
    :alt: Detailed Container Diagram of Administration Concession Payments Microservice
    :align: center
  

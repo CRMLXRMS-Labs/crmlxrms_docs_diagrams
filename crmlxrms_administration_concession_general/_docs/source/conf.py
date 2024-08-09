@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'CRMLXRMS Labs'
+project = 'CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling'
 copyright = '2024, Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk'
 author = 'Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk'
 

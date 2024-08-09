@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.7.29)  9 AUG 2024 18:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2024.7.29)  9 AUG 2024 18:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,7 +887,7 @@ File: t1txtt.fd 2000/12/15 v3.1
 ]
 Chapter 1.
 <authorization_microservice_-_detailed_container_diagram_with_registerconcessio
-ncommand.png, id=74, 2899.08093pt x 2194.44844pt>
+ncommand.png, id=301, 2899.08093pt x 2194.44844pt>
 File: authorization_microservice_-_detailed_container_diagram_with_registerconc
 essioncommand.png Graphic file (type png)
 <use authorization_microservice_-_detailed_container_diagram_with_registerconce
@@ -916,7 +916,7 @@ File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 [8]
 
 [9]
-<accounts_summary_service_-_complex_container_diagram.png, id=114, 2402.9775pt 
+<accounts_summary_service_-_complex_container_diagram.png, id=336, 2402.9775pt 
 x 1664.46844pt>
 File: accounts_summary_service_-_complex_container_diagram.png Graphic file (ty
 pe png)
@@ -931,99 +931,70 @@ ng  used on input line 841.
 [11]
 
 [12]
-File: authorization_microservice_-_detailed_container_diagram_with_registerconc
-essioncommand.png Graphic file (type png)
-<use authorization_microservice_-_detailed_container_diagram_with_registerconce
-ssioncommand.png>
-Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
-m_with_registerconcessioncommand.png  used on input line 1201.
-(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
-
 
 [13]
-File: authorization_microservice_-_detailed_container_diagram_with_registerconc
-essioncommand.png Graphic file (type png)
-<use authorization_microservice_-_detailed_container_diagram_with_registerconce
-ssioncommand.png>
-Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
-m_with_registerconcessioncommand.png  used on input line 1229.
-(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+<external_statistics_service_-_container_diagram.png, id=355, 2171.86406pt x 18
+66.975pt>
+File: external_statistics_service_-_container_diagram.png Graphic file (type pn
+g)
+<use external_statistics_service_-_container_diagram.png>
+Package pdftex.def Info: external_statistics_service_-_container_diagram.png  u
+sed on input line 1227.
+(pdftex.def)             Requested size: 469.72543pt x 403.78477pt.
 
 
-[14]
-File: authorization_microservice_-_detailed_container_diagram_with_registerconc
-essioncommand.png Graphic file (type png)
-<use authorization_microservice_-_detailed_container_diagram_with_registerconce
-ssioncommand.png>
-Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
-m_with_registerconcessioncommand.png  used on input line 1257.
-(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+[14 <./external_statistics_service_-_container_diagram.png>]
+<payments_service_-_container_diagram.png, id=360, 1941.50343pt x 1664.46844pt>
+
+File: payments_service_-_container_diagram.png Graphic file (type png)
+<use payments_service_-_container_diagram.png>
+Package pdftex.def Info: payments_service_-_container_diagram.png  used on inpu
+t line 1255.
+(pdftex.def)             Requested size: 469.73271pt x 402.7315pt.
 
 
-[15]
-File: authorization_microservice_-_detailed_container_diagram_with_registerconc
-essioncommand.png Graphic file (type png)
-<use authorization_microservice_-_detailed_container_diagram_with_registerconce
-ssioncommand.png>
-Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
-m_with_registerconcessioncommand.png  used on input line 1285.
-(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+[15 <./payments_service_-_container_diagram.png>]
+<permissions_summary_service_-_container_diagram.png, id=367, 3326.67844pt x 16
+75.00781pt>
+File: permissions_summary_service_-_container_diagram.png Graphic file (type pn
+g)
+<use permissions_summary_service_-_container_diagram.png>
+Package pdftex.def Info: permissions_summary_service_-_container_diagram.png  u
+sed on input line 1283.
+(pdftex.def)             Requested size: 469.74193pt x 236.51862pt.
 
 
-[16]
-File: authorization_microservice_-_detailed_container_diagram_with_registerconc
-essioncommand.png Graphic file (type png)
-<use authorization_microservice_-_detailed_container_diagram_with_registerconce
-ssioncommand.png>
-Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
-m_with_registerconcessioncommand.png  used on input line 1313.
-(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
+[16 <./permissions_summary_service_-_container_diagram.png>]
+<orders_service_-_container_diagram.png, id=373, 2171.86406pt x 1664.46844pt>
+File: orders_service_-_container_diagram.png Graphic file (type png)
+<use orders_service_-_container_diagram.png>
+Package pdftex.def Info: orders_service_-_container_diagram.png  used on input 
+line 1337.
+(pdftex.def)             Requested size: 469.72543pt x 360.01254pt.
 
 
 [17]
-File: authorization_microservice_-_detailed_container_diagram_with_registerconc
-essioncommand.png Graphic file (type png)
-<use authorization_microservice_-_detailed_container_diagram_with_registerconce
-ssioncommand.png>
-Package pdftex.def Info: authorization_microservice_-_detailed_container_diagra
-m_with_registerconcessioncommand.png  used on input line 1341.
-(pdftex.def)             Requested size: 469.74586pt x 355.57237pt.
 
-
-[18]
-
-[19]
-
-[20
-
-]
+[18 <./orders_service_-_container_diagram.png>]
 Chapter 2.
 No file crmlxrmslabs.ind.
 
 
-[21] (./crmlxrmslabs.aux)
+[19
+
+] (./crmlxrmslabs.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-05-27>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `crmlxrmslabs.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `crmlxrmslabs.out':
-(rerunfilecheck)             Before: 9C7781543F1A1538DB91289395EA4868;1066
-(rerunfilecheck)             After:  56E55623408A555011562B67C1977C6C;10499.
+Package rerunfilecheck Info: File `crmlxrmslabs.out' has not changed.
+(rerunfilecheck)             Checksum: 56E55623408A555011562B67C1977C6C;10499.
  ) 
 Here is how much of TeX's memory you used:
- 16655 strings out of 475544
- 281216 string characters out of 5777741
+ 16737 strings out of 475544
+ 283736 string characters out of 5777741
  1940905 words of memory out of 5000000
- 38835 multiletter control sequences out of 15000+600000
+ 38919 multiletter control sequences out of 15000+600000
  608304 words of font info for 74 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  72i,11n,79p,1001b,554s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1031,10 +1002,10 @@ Here is how much of TeX's memory you used:
 s/type1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/
 qtmr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on crmlxrmslabs.pdf (25 pages, 679226 bytes).
+Output written on crmlxrmslabs.pdf (23 pages, 1577495 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 214 compressed objects within 3 object streams
- 87 named destinations out of 1000 (max. 500000)
- 95 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 431 PDF objects out of 1000 (max. 8388607)
+ 380 compressed objects within 4 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 539 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,7 +5,7 @@ The External  Statistics Microservice is responsible for handling recieving From
 
 
 
-.. image:: ../_static/administration_concession_system/services_administration_concession_system/authorisation_service/container/authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand.png
+.. image:: ../_static/administration_concession_system/services_administration_concession_system/external_statistics_service/container/external_statistics_service_-_container_diagram.png
    :alt: Detailed Container Diagram of Administration Concession External Statistics Microservice
    :align: center
  
