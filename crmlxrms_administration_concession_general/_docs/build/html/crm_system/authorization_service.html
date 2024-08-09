@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CRM System Authorization Service &#8212; CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CRM System Accounts Summary Service" href="accounts_summary_service.html" />
+    <link rel="prev" title="CRM System" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="crm-system-authorization-service">
+<h1>CRM System Authorization Service<a class="headerlink" href="#crm-system-authorization-service" title="Link to this heading">¶</a></h1>
+<p>The Authorization Microservice is a core component of the CRM, which facilitates for
+- Identify user of CRM
+- Provide distributed Authentication for the Apigatway
+- Provide Global User Authorization With Corresponding permissions for crm system
+It handles authentication, authorization, and user management processes, which are essential for maintaining secure access and operational control. This microservice also integrates with the CRM system to share user data and operational events.</p>
+<img alt="Detailed Container Diagram of Authorization Microservice" class="align-center" src="../_images/authorization_microservice_-_detailed_container_diagram_with_registerconcessioncommand.png" />
+<section id="api-documentation">
+<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading">¶</a></h2>
+</section>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Link to this heading">¶</a></h2>
+<p><strong>UserLoginCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Initiates the process of logging a user into the system.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/login</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>username</cite> (string, required): The username of the user.
+- <cite>password</cite> (string, required): The password of the user.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>token</cite> (string): A JWT token for authenticated sessions.
+- <cite>expiresIn</cite> (int): Expiration time of the token in seconds.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>UserLoggedInEvent</cite></p></li>
+</ul>
+<p><strong>UserLogoutCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Initiates the process of logging a user out of the system.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/logout</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>: None</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation message that the user has been logged out.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>UserLoggedOutEvent</cite></p></li>
+</ul>
+<p><strong>RevokeAccessTokenCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Revokes a user’s access token, invalidating their current session.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/revoke-token</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>token</cite> (string, required): The access token to be revoked.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation message that the token has been revoked.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>UserLoggedOutEvent</cite></p></li>
+</ul>
+<p><strong>ResetPasswordCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Resets the password for a user’s account.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/reset-password</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>email</cite> (string, required): The email associated with the user’s account.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation that a password reset email has been sent.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>PasswordResetEvent</cite></p></li>
+</ul>
+<p><strong>Enable2FACommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Enables Two-Factor Authentication (2FA) for a user’s account.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/enable-2fa</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>userId</cite> (string, required): The ID of the user enabling 2FA.
+- <cite>token</cite> (string, required): The 2FA token generated by the user’s authenticator app.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation that 2FA has been enabled.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>TwoFactorEnabledEvent</cite></p></li>
+</ul>
+<p><strong>Disable2FACommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Disables Two-Factor Authentication (2FA) for a user’s account.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/disable-2fa</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>userId</cite> (string, required): The ID of the user disabling 2FA.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation that 2FA has been disabled.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>TwoFactorDisabledEvent</cite></p></li>
+</ul>
+<p><strong>VerifyEmailCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Initiates the process of verifying a user’s email address.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/verify-email</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>userId</cite> (string, required): The ID of the user verifying their email.
+- <cite>emailToken</cite> (string, required): The token sent to the user’s email.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation that the email has been verified.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>EmailVerifiedEvent</cite>, <cite>EmailVerificationFailedEvent</cite></p></li>
+</ul>
+<p><strong>RegisterConcessionCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Registers a new concession within the system.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/register-concession</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>concessionName</cite> (string, required): The name of the concession.
+- <cite>adminEmail</cite> (string, required): The email of the concession’s administrator.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): 200 – Confirmation that the concession has been registered.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>ConcessionRegisteredEvent</cite></p></li>
+</ul>
+</section>
+<section id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Link to this heading">¶</a></h2>
+<p><strong>GetUserPermissionsQuery</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Retrieves the permissions associated with a user.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/get-user-permissions</cite></p></li>
+<li><p><strong>Method</strong>: <cite>GET</cite></p></li>
+<li><p><strong>Request Parameters</strong>:
+- <cite>userId</cite> (string, required): The ID of the user whose permissions are being retrieved.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>permissions</cite> (array of strings): A list of permissions associated with the user.</p></li>
+</ul>
+<p><strong>GetUserDetailsQuery</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Fetches the details of a specific user.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/get-user-details</cite></p></li>
+<li><p><strong>Method</strong>: <cite>GET</cite></p></li>
+<li><p><strong>Request Parameters</strong>:
+- <cite>userId</cite> (string, required): The ID of the user whose details are being fetched.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>userId</cite> (string): The ID of the user.
+- <cite>username</cite> (string): The username of the user.
+- <cite>email</cite> (string): The email of the user.
+- <cite>roles</cite> (array of strings): A list of roles assigned to the user.</p></li>
+</ul>
+<p><strong>Get2FAStatusQuery</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Retrieves the 2FA (Two-Factor Authentication) status of a user.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/get-2fa-status</cite></p></li>
+<li><p><strong>Method</strong>: <cite>GET</cite></p></li>
+<li><p><strong>Request Parameters</strong>:
+- <cite>userId</cite> (string, required): The ID of the user whose 2FA status is being retrieved.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>is2FAEnabled</cite> (boolean): Indicates whether 2FA is enabled for the user.</p></li>
+</ul>
+</section>
+<section id="inbox-events">
+<h2>Inbox Events<a class="headerlink" href="#inbox-events" title="Link to this heading">¶</a></h2>
+<p>The Authorization Microservice processes the following inbox events:</p>
+<p><strong>ChangeUserRightsEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: An event that triggers when a user’s rights are changed within the CRM system.</p></li>
+<li><p><strong>Source</strong>: CRM System – Leads summary/managenent service (External CRM event bus brigged to Administration concession system).</p></li>
+<li><p><strong>Actions</strong>: Updates the user’s permissions within the Administration Concession System to reflect the changes made in the CRM system.</p></li>
+</ul>
+<p><strong>BlockUserAccessEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: An event that triggers when a user is blocked or suspended in the CRM system.</p></li>
+<li><p><strong>Source</strong>: CRM System – Leads summary/managenent service  (External CRM event bus brigged to Administration concession system).</p></li>
+<li><p><strong>Actions</strong>: Immediately revokes the user’s access to the Administration Concession System, ensuring that the block is enforced across systems.</p></li>
+</ul>
+<p><strong>UnBlockUserAccessEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: An event that triggers when a user is unblocked in case of being suspended in the CRM system.</p></li>
+<li><p><strong>Source</strong>: CRM System – Leads summary/managenent service  (External CRM event bus brigged to Administration concession system).</p></li>
+<li><p><strong>Actions</strong>: Immediately revokes the user’s access to the Administration Concession System, ensuring that the block is enforced across systems.</p></li>
+</ul>
+</section>
+<section id="outbox-events">
+<h2>Outbox Events<a class="headerlink" href="#outbox-events" title="Link to this heading">¶</a></h2>
+<p>The Authorization Microservice emits the following outbox events:</p>
+<p><strong>UserLoggedInEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a successful user login within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: Administration Concession system Internal operation serivce, CRM System Leads Summary Service (leads hub connector service), CRM GRPC intergnal operations service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession Administrator user and CRM system user of the user’s login, updates session details.</p></li>
+</ul>
+<p><strong>User2FaAccessTokenGenerated</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a successful user login within the password and login to  the Administration Concession System but having the 2fa enabled.</p></li>
+<li><p><strong>Destination</strong>: Administration Concession system Notification service, Administration Concession System Internal Operations service.</p></li>
+<li><p><strong>Actions</strong>: Required Noitification service Event Emition to pass the token generated back to User trying to sign-in, Notify Administration of Concession system of having the user trying to access the system with 2fa token.</p></li>
+</ul>
+<p><strong>UserLoggedOutEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a user logs out within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the CRM system that the user has logged out (updated leads connection hub), updates session termination details.</p></li>
+</ul>
+<p><strong>PasswordResetEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a user’s password is reset within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the specifi user (lead in the case of CRM) password reset, triggers notifications in Administration Concession System Notifcation service (which will be possibly passed to Email Service), and updates security logs.</p></li>
+</ul>
+<p><strong>TwoFactorEnabledEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after Two-Factor Authentication is enabled for a user within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. .</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the specifi user update, updates user security settings, and ensures that 2FA is enforced consistently across AConS.</p></li>
+</ul>
+<p><strong>TwoFactorDisabledEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after Two-Factor Authentication is disabled for a user within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. .</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the specifi user update, updates user security settings, and ensures that 2FA is enforced consistently across AConS.</p></li>
+</ul>
+<p><strong>EmailVerifiedEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted when a user’s email is successfully verified within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service,  Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of specific user (lead) email verification, updates the user’s profile.</p></li>
+</ul>
+<p><strong>EmailVerificationFailedEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted when a user’s email verification fails within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Operation service, CRM leads summary service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of specific user (lead) failed verification, updates logs, and marks the user’s email as unverified.</p></li>
+</ul>
+<p><strong>ConcessionRegisteredEvent</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Emitted after a new concession is registered within the Administration Concession System.</p></li>
+<li><p><strong>Destination</strong>: CRM System Orders service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service.</p></li>
+<li><p><strong>Actions</strong>: Notifies the Administration Concession System administrator, CRM system of the new concession, triggers onboarding processes, and syncs concession details across systems.</p></li>
+</ul>
+</section>
+</section>
+<section id="authorization-service-database-documentation">
+<h1>Authorization Service Database Documentation<a class="headerlink" href="#authorization-service-database-documentation" title="Link to this heading">¶</a></h1>
+<p>The <cite>Authorization Service</cite> manages the storage and retrieval of authentication, authorization, and user management data within the Administration Concession System. The database contains several key documents that are essential for handling user identities, permissions, and authentication mechanisms.</p>
+<section id="userdocument">
+<h2>UserDocument<a class="headerlink" href="#userdocument" title="Link to this heading">¶</a></h2>
+<p>Represents the core information related to a user in the system. This document is essential for managing user authentication, authorization, and profile details.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the user.</p></li>
+<li><p><strong>Username</strong>: <cite>string</cite>
+- The username chosen by the user.</p></li>
+<li><p><strong>Email</strong>: <cite>string</cite>
+- The email address associated with the user’s account.</p></li>
+<li><p><strong>Role</strong>: <cite>string</cite>
+- The role assigned to the user (e.g., <cite>Admin</cite>, <cite>User</cite>).</p></li>
+<li><p><strong>PasswordHash</strong>: <cite>string</cite>
+- The hashed password for the user’s account.</p></li>
+<li><p><strong>CreatedAt</strong>: <cite>DateTime</cite>
+- The timestamp when the user account was created.</p></li>
+<li><p><strong>IsEmailVerified</strong>: <cite>bool</cite>
+- Indicates whether the user’s email has been verified.</p></li>
+<li><p><strong>EmailVerificationToken</strong>: <cite>string</cite>
+- The token used for verifying the user’s email address.</p></li>
+<li><p><strong>EmailVerifiedAt</strong>: <cite>DateTime?</cite>
+- The timestamp when the user’s email was verified.</p></li>
+<li><p><strong>IsTwoFactorEnabled</strong>: <cite>bool</cite>
+- Indicates whether Two-Factor Authentication (2FA) is enabled for the user.</p></li>
+<li><p><strong>TwoFactorSecret</strong>: <cite>string</cite>
+- The secret key used for generating 2FA codes.</p></li>
+</ul>
+</section>
+<section id="refreshtokendocument">
+<h2>RefreshTokenDocument<a class="headerlink" href="#refreshtokendocument" title="Link to this heading">¶</a></h2>
+<p>Stores the refresh tokens associated with a user’s session. These tokens are used to renew access tokens without requiring the user to re-authenticate.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the refresh token.</p></li>
+<li><p><strong>UserId</strong>: <cite>Guid</cite>
+- The identifier of the user to whom the refresh token belongs.</p></li>
+<li><p><strong>Token</strong>: <cite>string</cite>
+- The actual refresh token value.</p></li>
+<li><p><strong>CreatedAt</strong>: <cite>DateTime</cite>
+- The timestamp when the refresh token was created.</p></li>
+<li><p><strong>RevokedAt</strong>: <cite>DateTime?</cite>
+- The timestamp when the refresh token was revoked (if applicable).</p></li>
+</ul>
+</section>
+<section id="userresettokendocument">
+<h2>UserResetTokenDocument<a class="headerlink" href="#userresettokendocument" title="Link to this heading">¶</a></h2>
+<p>Manages the tokens used for resetting a user’s password. This document is crucial for handling the password reset flow securely.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the reset token.</p></li>
+<li><p><strong>UserId</strong>: <cite>Guid</cite>
+- The identifier of the user requesting the password reset.</p></li>
+<li><p><strong>ResetToken</strong>: <cite>string</cite>
+- The token sent to the user for resetting their password.</p></li>
+<li><p><strong>ResetTokenExpires</strong>: <cite>DateTime?</cite>
+- The expiration timestamp for the reset token.</p></li>
+</ul>
+</section>
+<section id="permissionsdocument">
+<h2>PermissionsDocument<a class="headerlink" href="#permissionsdocument" title="Link to this heading">¶</a></h2>
+<p>Represents the permissions that a user has within the system. This document is crucial for determining the specific actions a user is allowed to perform based on the roles and permissions assigned to them.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the permission entry.</p></li>
+<li><p><strong>UserId</strong>: <cite>Guid</cite>
+- The identifier of the user to whom the permissions belong.</p></li>
+<li><p><strong>Permissions</strong>: <cite>IEnumerable&lt;string&gt;</cite>
+- A list of permission strings that define the actions the user is allowed to perform (e.g., <cite>ViewDashboard</cite>, <cite>EditConcession</cite>, <cite>ManageUsers</cite>).</p></li>
+<li><p><strong>AssignedAt</strong>: <cite>DateTime</cite>
+- The timestamp when these permissions were assigned to the user.</p></li>
+<li><p><strong>ExpiresAt</strong>: <cite>DateTime?</cite>
+- The optional timestamp indicating when these permissions expire (if applicable).</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../administration_concession_system/index.html">Administration Concession System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CRM System</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CRM System Authorization Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authorization-service-database-documentation">Authorization Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html">CRM System Accounts Summary Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html">CRM System Internal Statistics Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#internal-statistics-service-database-documentation">Internal Statistics Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html">CRM System External Statistics Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#external-statistics-service-database-documentation">External Statistics Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html">CRM System Payments Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html">CRM System Permissions Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#permissions-service-database-documentation">Permissions Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html">CRM System Tasks Summary Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#tasks-summary-service-database-documentation">Tasks Summary Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html">CRM System Payments Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html">CRM Internal Operations Log Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#concession-internal-operations-log-service-database-documentation">Concession Internal Operations Log Service Database Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">CRM System</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">CRM System</a></li>
+      <li>Next: <a href="accounts_summary_service.html" title="next chapter">CRM System Accounts Summary Service</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Amadeusz Nowak, Andrii Voznesenskyi, Piotr Padamczyk.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/crm_system/authorization_service.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

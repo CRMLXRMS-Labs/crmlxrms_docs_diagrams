@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CRM System &#8212; CRMLXRMS Labs  documentation</title>
+    <title>CRM System &#8212; CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
@@ -14,7 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Administration Concession System Payments Service" href="../administration_concession_system/orders_service.html" />
+    <link rel="next" title="CRM System Authorization Service" href="authorization_service.html" />
+    <link rel="prev" title="Administration Concession Internal Operations Log Service" href="../administration_concession_system/internal_operations_log_service.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,6 +36,94 @@
   <section id="crm-system">
 <h1>CRM System<a class="headerlink" href="#crm-system" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authorization_service.html">CRM System Authorization Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="authorization_service.html#authorization-service-database-documentation">Authorization Service Database Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#userdocument">UserDocument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#refreshtokendocument">RefreshTokenDocument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#userresettokendocument">UserResetTokenDocument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#permissionsdocument">PermissionsDocument</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="accounts_summary_service.html">CRM System Accounts Summary Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internal_satistics_service.html">CRM System Internal Statistics Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internal_satistics_service.html#internal-statistics-service-database-documentation">Internal Statistics Service Database Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_statistics_service.html">CRM System External Statistics Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="external_statistics_service.html#external-statistics-service-database-documentation">External Statistics Service Database Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payments_service.html">CRM System Payments Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="payments_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_service.html">CRM System Permissions Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="permissions_service.html#permissions-service-database-documentation">Permissions Service Database Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks_summary_service.html">CRM System Tasks Summary Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tasks_summary_service.html#tasks-summary-service-database-documentation">Tasks Summary Service Database Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orders_service.html">CRM System Payments Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="orders_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internal_operations_log_service.html">CRM Internal Operations Log Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#inbox-events">Inbox Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#outbox-events">Outbox Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internal_operations_log_service.html#concession-internal-operations-log-service-database-documentation">Concession Internal Operations Log Service Database Documentation</a></li>
+</ul>
 </div>
 </section>
 
@@ -45,7 +134,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">CRMLXRMS Labs</a></h1>
+<h1 class="logo"><a href="../index.html">CRMLXRMS Labs -- distributed businees intelligence solution with predictive modeling</a></h1>
 
 
 
@@ -67,7 +156,24 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../administration_concession_system/index.html">Administration Concession System</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">CRM System</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CRM System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html">CRM System Authorization Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authorization_service.html#authorization-service-database-documentation">Authorization Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html">CRM System Accounts Summary Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html">CRM System Internal Statistics Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_satistics_service.html#internal-statistics-service-database-documentation">Internal Statistics Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html">CRM System External Statistics Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_statistics_service.html#external-statistics-service-database-documentation">External Statistics Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html">CRM System Payments Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="payments_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html">CRM System Permissions Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions_service.html#permissions-service-database-documentation">Permissions Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html">CRM System Tasks Summary Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_summary_service.html#tasks-summary-service-database-documentation">Tasks Summary Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html">CRM System Payments Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orders_service.html#payments-service-database-documentation">Payments Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html">CRM Internal Operations Log Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internal_operations_log_service.html#concession-internal-operations-log-service-database-documentation">Concession Internal Operations Log Service Database Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -76,7 +182,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../administration_concession_system/orders_service.html" title="previous chapter">Administration Concession System Payments Service</a></li>
+      <li>Previous: <a href="../administration_concession_system/internal_operations_log_service.html" title="previous chapter">Administration Concession Internal Operations Log Service</a></li>
+      <li>Next: <a href="authorization_service.html" title="next chapter">CRM System Authorization Service</a></li>
   </ul></li>
 </ul>
 </div>

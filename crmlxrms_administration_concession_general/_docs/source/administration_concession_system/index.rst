@@ -12,3 +12,4 @@ Administration Concession System
    permissions_service
    tasks_summary_service
    orders_service
+   internal_operations_log_service
