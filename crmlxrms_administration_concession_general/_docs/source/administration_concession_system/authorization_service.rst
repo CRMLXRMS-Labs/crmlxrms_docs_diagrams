@@ -37,6 +37,18 @@ Commands
   - `message` (string): Confirmation message that the user has been logged out.
 - **Events Triggered**: `UserLoggedOutEvent`
 
+
+**RevokeAccessTokenCommand**
+
+- **Description**: Revokes a user's access token, invalidating their current session.
+- **Request URL**: `/api/auth/revoke-token`
+- **Method**: `POST`
+- **Request Body**:
+  - `token` (string, required): The access token to be revoked.
+- **Response**:
+  - `message` (string): Confirmation message that the token has been revoked.
+- **Events Triggered**: `UserLoggedOutEvent`
+
 **ResetPasswordCommand**
 
 - **Description**: Resets the password for a user's account.
@@ -92,7 +104,7 @@ Commands
   - `concessionName` (string, required): The name of the concession.
   - `adminEmail` (string, required): The email of the concession's administrator.
 - **Response**:
-  - `message` (string): Confirmation that the concession has been registered.
+  - `message` (string): 200 -- Confirmation that the concession has been registered.
 - **Events Triggered**: `ConcessionRegisteredEvent`
 
 Queries
@@ -215,3 +227,84 @@ The Authorization Microservice emits the following outbox events:
 - **Description**: Emitted after a new concession is registered within the Administration Concession System.
 - **Destination**: CRM System Orders service, Administration Concession system Accouns summary service, Administration Concession System Internal Operations Service, CRM Internal Operaions service. 
 - **Actions**: Notifies the Administration Concession System administrator, CRM system of the new concession, triggers onboarding processes, and syncs concession details across systems.
+
+
+Authorization Service Database Documentation
+============================================
+
+The `Authorization Service` manages the storage and retrieval of authentication, authorization, and user management data within the Administration Concession System. The database contains several key documents that are essential for handling user identities, permissions, and authentication mechanisms.
+
+UserDocument
+------------
+
+Represents the core information related to a user in the system. This document is essential for managing user authentication, authorization, and profile details.
+
+- **Id**: `Guid`
+  - Unique identifier for the user.
+- **Username**: `string`
+  - The username chosen by the user.
+- **Email**: `string`
+  - The email address associated with the user's account.
+- **Role**: `string`
+  - The role assigned to the user (e.g., `Admin`, `User`).
+- **PasswordHash**: `string`
+  - The hashed password for the user's account.
+- **CreatedAt**: `DateTime`
+  - The timestamp when the user account was created.
+- **IsEmailVerified**: `bool`
+  - Indicates whether the user's email has been verified.
+- **EmailVerificationToken**: `string`
+  - The token used for verifying the user's email address.
+- **EmailVerifiedAt**: `DateTime?`
+  - The timestamp when the user's email was verified.
+- **IsTwoFactorEnabled**: `bool`
+  - Indicates whether Two-Factor Authentication (2FA) is enabled for the user.
+- **TwoFactorSecret**: `string`
+  - The secret key used for generating 2FA codes.
+
+RefreshTokenDocument
+--------------------
+
+Stores the refresh tokens associated with a user's session. These tokens are used to renew access tokens without requiring the user to re-authenticate.
+
+- **Id**: `Guid`
+  - Unique identifier for the refresh token.
+- **UserId**: `Guid`
+  - The identifier of the user to whom the refresh token belongs.
+- **Token**: `string`
+  - The actual refresh token value.
+- **CreatedAt**: `DateTime`
+  - The timestamp when the refresh token was created.
+- **RevokedAt**: `DateTime?`
+  - The timestamp when the refresh token was revoked (if applicable).
+
+UserResetTokenDocument
+----------------------
+
+Manages the tokens used for resetting a user's password. This document is crucial for handling the password reset flow securely.
+
+- **Id**: `Guid`
+  - Unique identifier for the reset token.
+- **UserId**: `Guid`
+  - The identifier of the user requesting the password reset.
+- **ResetToken**: `string`
+  - The token sent to the user for resetting their password.
+- **ResetTokenExpires**: `DateTime?`
+  - The expiration timestamp for the reset token.
+
+
+PermissionsDocument
+-------------------
+
+Represents the permissions that a user has within the system. This document is crucial for determining the specific actions a user is allowed to perform based on the roles and permissions assigned to them.
+
+- **Id**: `Guid`
+  - Unique identifier for the permission entry.
+- **UserId**: `Guid`
+  - The identifier of the user to whom the permissions belong.
+- **Permissions**: `IEnumerable<string>`
+  - A list of permission strings that define the actions the user is allowed to perform (e.g., `ViewDashboard`, `EditConcession`, `ManageUsers`).
+- **AssignedAt**: `DateTime`
+  - The timestamp when these permissions were assigned to the user.
+- **ExpiresAt**: `DateTime?`
+  - The optional timestamp indicating when these permissions expire (if applicable).

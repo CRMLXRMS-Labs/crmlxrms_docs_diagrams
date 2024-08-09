@@ -14,7 +14,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CRM System" href="../crm_system/index.html" />
+    <link rel="next" title="Accounts Summary Service" href="accounts_summary_service.html" />
     <link rel="prev" title="Administration Concession System" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -63,6 +63,17 @@
 <li><p><strong>Request Body</strong>: None</p></li>
 <li><p><strong>Response</strong>:
 - <cite>message</cite> (string): Confirmation message that the user has been logged out.</p></li>
+<li><p><strong>Events Triggered</strong>: <cite>UserLoggedOutEvent</cite></p></li>
+</ul>
+<p><strong>RevokeAccessTokenCommand</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Revokes a user’s access token, invalidating their current session.</p></li>
+<li><p><strong>Request URL</strong>: <cite>/api/auth/revoke-token</cite></p></li>
+<li><p><strong>Method</strong>: <cite>POST</cite></p></li>
+<li><p><strong>Request Body</strong>:
+- <cite>token</cite> (string, required): The access token to be revoked.</p></li>
+<li><p><strong>Response</strong>:
+- <cite>message</cite> (string): Confirmation message that the token has been revoked.</p></li>
 <li><p><strong>Events Triggered</strong>: <cite>UserLoggedOutEvent</cite></p></li>
 </ul>
 <p><strong>ResetPasswordCommand</strong></p>
@@ -120,7 +131,7 @@
 - <cite>concessionName</cite> (string, required): The name of the concession.
 - <cite>adminEmail</cite> (string, required): The email of the concession’s administrator.</p></li>
 <li><p><strong>Response</strong>:
-- <cite>message</cite> (string): Confirmation that the concession has been registered.</p></li>
+- <cite>message</cite> (string): 200 – Confirmation that the concession has been registered.</p></li>
 <li><p><strong>Events Triggered</strong>: <cite>ConcessionRegisteredEvent</cite></p></li>
 </ul>
 </section>
@@ -241,6 +252,84 @@
 </ul>
 </section>
 </section>
+<section id="authorization-service-database-documentation">
+<h1>Authorization Service Database Documentation<a class="headerlink" href="#authorization-service-database-documentation" title="Link to this heading">¶</a></h1>
+<p>The <cite>Authorization Service</cite> manages the storage and retrieval of authentication, authorization, and user management data within the Administration Concession System. The database contains several key documents that are essential for handling user identities, permissions, and authentication mechanisms.</p>
+<section id="userdocument">
+<h2>UserDocument<a class="headerlink" href="#userdocument" title="Link to this heading">¶</a></h2>
+<p>Represents the core information related to a user in the system. This document is essential for managing user authentication, authorization, and profile details.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the user.</p></li>
+<li><p><strong>Username</strong>: <cite>string</cite>
+- The username chosen by the user.</p></li>
+<li><p><strong>Email</strong>: <cite>string</cite>
+- The email address associated with the user’s account.</p></li>
+<li><p><strong>Role</strong>: <cite>string</cite>
+- The role assigned to the user (e.g., <cite>Admin</cite>, <cite>User</cite>).</p></li>
+<li><p><strong>PasswordHash</strong>: <cite>string</cite>
+- The hashed password for the user’s account.</p></li>
+<li><p><strong>CreatedAt</strong>: <cite>DateTime</cite>
+- The timestamp when the user account was created.</p></li>
+<li><p><strong>IsEmailVerified</strong>: <cite>bool</cite>
+- Indicates whether the user’s email has been verified.</p></li>
+<li><p><strong>EmailVerificationToken</strong>: <cite>string</cite>
+- The token used for verifying the user’s email address.</p></li>
+<li><p><strong>EmailVerifiedAt</strong>: <cite>DateTime?</cite>
+- The timestamp when the user’s email was verified.</p></li>
+<li><p><strong>IsTwoFactorEnabled</strong>: <cite>bool</cite>
+- Indicates whether Two-Factor Authentication (2FA) is enabled for the user.</p></li>
+<li><p><strong>TwoFactorSecret</strong>: <cite>string</cite>
+- The secret key used for generating 2FA codes.</p></li>
+</ul>
+</section>
+<section id="refreshtokendocument">
+<h2>RefreshTokenDocument<a class="headerlink" href="#refreshtokendocument" title="Link to this heading">¶</a></h2>
+<p>Stores the refresh tokens associated with a user’s session. These tokens are used to renew access tokens without requiring the user to re-authenticate.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the refresh token.</p></li>
+<li><p><strong>UserId</strong>: <cite>Guid</cite>
+- The identifier of the user to whom the refresh token belongs.</p></li>
+<li><p><strong>Token</strong>: <cite>string</cite>
+- The actual refresh token value.</p></li>
+<li><p><strong>CreatedAt</strong>: <cite>DateTime</cite>
+- The timestamp when the refresh token was created.</p></li>
+<li><p><strong>RevokedAt</strong>: <cite>DateTime?</cite>
+- The timestamp when the refresh token was revoked (if applicable).</p></li>
+</ul>
+</section>
+<section id="userresettokendocument">
+<h2>UserResetTokenDocument<a class="headerlink" href="#userresettokendocument" title="Link to this heading">¶</a></h2>
+<p>Manages the tokens used for resetting a user’s password. This document is crucial for handling the password reset flow securely.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the reset token.</p></li>
+<li><p><strong>UserId</strong>: <cite>Guid</cite>
+- The identifier of the user requesting the password reset.</p></li>
+<li><p><strong>ResetToken</strong>: <cite>string</cite>
+- The token sent to the user for resetting their password.</p></li>
+<li><p><strong>ResetTokenExpires</strong>: <cite>DateTime?</cite>
+- The expiration timestamp for the reset token.</p></li>
+</ul>
+</section>
+<section id="permissionsdocument">
+<h2>PermissionsDocument<a class="headerlink" href="#permissionsdocument" title="Link to this heading">¶</a></h2>
+<p>Represents the permissions that a user has within the system. This document is crucial for determining the specific actions a user is allowed to perform based on the roles and permissions assigned to them.</p>
+<ul class="simple">
+<li><p><strong>Id</strong>: <cite>Guid</cite>
+- Unique identifier for the permission entry.</p></li>
+<li><p><strong>UserId</strong>: <cite>Guid</cite>
+- The identifier of the user to whom the permissions belong.</p></li>
+<li><p><strong>Permissions</strong>: <cite>IEnumerable&lt;string&gt;</cite>
+- A list of permission strings that define the actions the user is allowed to perform (e.g., <cite>ViewDashboard</cite>, <cite>EditConcession</cite>, <cite>ManageUsers</cite>).</p></li>
+<li><p><strong>AssignedAt</strong>: <cite>DateTime</cite>
+- The timestamp when these permissions were assigned to the user.</p></li>
+<li><p><strong>ExpiresAt</strong>: <cite>DateTime?</cite>
+- The optional timestamp indicating when these permissions expire (if applicable).</p></li>
+</ul>
+</section>
+</section>
 
 
           </div>
@@ -272,6 +361,8 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Administration Concession System</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Authorization Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authorization-service-database-documentation">Authorization Service Database Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accounts_summary_service.html">Accounts Summary Service</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../crm_system/index.html">CRM System</a></li>
@@ -283,7 +374,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Administration Concession System</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Administration Concession System</a></li>
-      <li>Next: <a href="../crm_system/index.html" title="next chapter">CRM System</a></li>
+      <li>Next: <a href="accounts_summary_service.html" title="next chapter">Accounts Summary Service</a></li>
   </ul></li>
   </ul></li>
 </ul>
